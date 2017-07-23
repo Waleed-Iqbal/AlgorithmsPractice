@@ -9,12 +9,6 @@ namespace AlgorithmsPractice
 {
     class Program
     {
-        public struct MatirxPoint
-        {
-            public int row;
-            public int column;
-        }
-
         static void Main(String[] args)
         {
             int numberOfRows = 5;
@@ -23,16 +17,22 @@ namespace AlgorithmsPractice
             int[,] randomNumbersMatrix = RandomNumberArrayGenerator.GetRandomNumber2DArray(-20, 20, numberOfRows, numberOfColumns);
             MatirxPoint peak = new MatirxPoint { row = numberOfRows / 2, column = numberOfColumns / 2 };
 
+            // to print the matrix
+            for (int i = 0; i < numberOfRows; i++)
+            {
+                Console.WriteLine();
+                for (int j = 0; j < numberOfColumns; j++)
+                    Console.Write(randomNumbersMatrix[i,j] + "   ");
+            }
+
+            peak = PeakFinder.GetPeakOfTwoDimensionalArray(randomNumbersMatrix, peak);
+            Console.WriteLine(Environment.NewLine + Environment.NewLine + " " + peak.row + ", " + peak.column);
+
             Console.WriteLine();
         }
 
 
-        public static MatirxPoint GetPeakOfTwoDimensionalArray(int[][] matrix, int min, int max, MatirxPoint currentPeak)
-        {
 
-
-            return currentPeak;
-        }
 
 
     }
