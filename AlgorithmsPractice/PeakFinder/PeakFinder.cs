@@ -35,7 +35,7 @@ namespace AlgorithmsPractice
             int selectedColumn = currentPeak.column;
             int rowOfSelectedColumn = GetRowOfMaximumValueInAColumn(matrix, selectedColumn);
 
-            if (matrix[rowOfSelectedColumn, selectedColumn] >= matrix[rowOfSelectedColumn, selectedColumn-1] && matrix[rowOfSelectedColumn, selectedColumn] >= matrix[rowOfSelectedColumn, selectedColumn + 1])
+            if (matrix[rowOfSelectedColumn, selectedColumn] >= matrix[rowOfSelectedColumn, selectedColumn - 1] && matrix[rowOfSelectedColumn, selectedColumn] >= matrix[rowOfSelectedColumn, selectedColumn + 1])
             {
                 currentPeak.column = selectedColumn;
                 currentPeak.row = rowOfSelectedColumn;
@@ -46,7 +46,7 @@ namespace AlgorithmsPractice
                 GetPeakOfTwoDimensionalArray(matrix, currentPeak);
             }
 
-                return currentPeak;
+            return currentPeak;
         }
 
         /// <summary>
