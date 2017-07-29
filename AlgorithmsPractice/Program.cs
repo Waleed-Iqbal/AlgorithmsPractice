@@ -11,9 +11,9 @@ namespace AlgorithmsPractice
     {
         static void Main(String[] args)
         {
-            string document1 = @"D:\Projects\AlgorithmsPractice\AlgorithmsPractice\Resources\t1.verne.txt";
-            string document2 = @"D:\Projects\AlgorithmsPractice\AlgorithmsPractice\Resources\t1.bobsey.txt";
-            long computedDistance = DocumentDistance.FindDistance(document1, document2);
+            string firstDocumentPath = @"D:\Projects\AlgorithmsPractice\AlgorithmsPractice\Resources\t1.verne.txt";
+            string secondDocumentPath = @"D:\Projects\AlgorithmsPractice\AlgorithmsPractice\Resources\t2.bobsey.txt";
+            double computedDistance = DocumentDistance.FindDistance(firstDocumentPath, secondDocumentPath);
 
             Console.WriteLine(Environment.NewLine + " Distance computed = " + computedDistance);
             Console.WriteLine(Environment.NewLine + " Actual distance = 0.53338963892153224");

@@ -57,6 +57,12 @@
       <Name>RandomNumberGenerator</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\t1.verne.txt" />
+    <Content Include="Resources\t2.bobsey.txt" />
+    <Content Include="Resources\t8.shakespeare.txt" />
+    <Content Include="Resources\t9.bacon.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
