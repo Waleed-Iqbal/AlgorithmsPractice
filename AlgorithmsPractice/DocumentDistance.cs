@@ -60,3 +60,42 @@ namespace AlgorithmsPractice
         }
     }
 }
+/*
+ 
+   Document distance of 't1.verne.txt' and 't2.bobsey.txt' is 0.53338963892153224
+
+   Document distance of 't2.bobsey.txt' and 't9.bacon.txt' is 0.52464214746385918
+
+   Document distance of 't8.shakespeare.txt' and 't9.bacon.txt' is 0.55090929545369682
+
+
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
