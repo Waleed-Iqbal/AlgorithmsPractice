@@ -12,27 +12,38 @@ namespace AlgorithmsPractice
         public static double FindDistance(string firstDocumentPath, string secondDocumentPath)
         {
             double distance = 0;
-            string[] document1Words = GetWordsFromDocument(firstDocumentPath);
-            string[] document2Words = GetWordsFromDocument(secondDocumentPath);
+            string[] firstDocumentWords = GetWordsFromDocument(firstDocumentPath);
+            string[] secondDocumentWords = GetWordsFromDocument(secondDocumentPath);
 
-            Dictionary<string, int> firstDocumentWordsFrequencies = GetFrequenciesOfWords(document1Words);
-            Dictionary<string, int> secondDocumentWordsFrequencies = GetFrequenciesOfWords(document2Words);
+            Dictionary<string, int> firstDocumentWordsFrequencies = GetFrequenciesOfWords(firstDocumentWords);
+            Dictionary<string, int> secondDocumentWordsFrequencies = GetFrequenciesOfWords(secondDocumentWords);
 
-            long dotProduct = ComputeDotProductOfTwoDocuments(firstDocumentWordsFrequencies, secondDocumentWordsFrequencies);
-            double magnitude = MagnitudeOfDocuments(firstDocumentWordsFrequencies) * MagnitudeOfDocuments(secondDocumentWordsFrequencies);
+            ulong dotProduct = ComputeDotProductOfTwoDocuments(firstDocumentWordsFrequencies, secondDocumentWordsFrequencies);
+            double magnitude = MagnitudeOfDocuments(firstDocumentWordsFrequencies, secondDocumentWordsFrequencies);
 
-            distance = dotProduct / magnitude;
+            distance = Math.Acos( dotProduct / magnitude);
 
             return distance;
         }
 
-        private static double MagnitudeOfDocuments(Dictionary<string, int> documentWordsFrequencies)
+        private static double MagnitudeOfDocuments(Dictionary<string, int> firstDocumentWordsFrequencies, Dictionary<string, int> secondDocumentWordsFrequencies)
         {
-            long sumOfSquares = 0;
-            foreach (var item in documentWordsFrequencies)
-                sumOfSquares += item.Value * item.Value;
-            double magnitude = Math.Sqrt(sumOfSquares);
-            return magnitude;
+            double magnitudeOfFirstDocument = 0;
+            double magnitudeOfSecondDocument = 0;
+
+
+            foreach (var item in firstDocumentWordsFrequencies)
+                if (secondDocumentWordsFrequencies.ContainsKey(item.Key))
+                    magnitudeOfFirstDocument += Convert.ToUInt64(item.Value * item.Value);
+            magnitudeOfFirstDocument = Math.Sqrt(magnitudeOfFirstDocument);
+
+            foreach (var item in secondDocumentWordsFrequencies)
+                if (firstDocumentWordsFrequencies.ContainsKey(item.Key))
+                    magnitudeOfSecondDocument += Convert.ToUInt64(item.Value * item.Value);
+            magnitudeOfSecondDocument = Math.Sqrt(magnitudeOfSecondDocument);
+
+
+            return magnitudeOfFirstDocument * magnitudeOfSecondDocument;
         }
 
         private static string[] GetWordsFromDocument(string documentPath)
@@ -40,8 +51,8 @@ namespace AlgorithmsPractice
             string fileContent = System.IO.File.ReadAllText(documentPath);
             //fileContent = new string(fileContent.Where(c => char.IsWhiteSpace(c) || char.IsLetterOrDigit(c)).ToArray());
             fileContent = Regex.Replace(fileContent, @"[^A-Za-z0-9]", " "); // gets only numbers and words
-            fileContent = Regex.Replace(fileContent, @"\t|\n|\r", " "); // remove tabs, new line characters and returns
-            fileContent = Regex.Replace(fileContent, @"[ ]{2,}", " "); // remove spaces spaning more than 2 characters
+            //fileContent = Regex.Replace(fileContent, @"\t|\n|\r", " "); // remove tabs, new line characters and returns
+            fileContent = Regex.Replace(fileContent, @"[ ]{1,}", " "); // remove spaces spaning more than 2 characters
 
             List<string> words = fileContent.ToLower().Split(' ').ToList();
             return words.ToArray();
@@ -51,32 +62,30 @@ namespace AlgorithmsPractice
         {
             Dictionary<string, int> wordFrequencies = new Dictionary<string, int>();
 
-            foreach(string word in document)
-            {
+            foreach (string word in document)
                 if (wordFrequencies.ContainsKey(word))
                     wordFrequencies[word]++;
                 else
                     wordFrequencies.Add(word, 1);
-            }
 
             return wordFrequencies;
         }
 
 
-        private static long ComputeDotProductOfTwoDocuments(Dictionary<string, int> firstDocumentWordsFrequencies, Dictionary<string, int> secondDocumentWordsFrequencies)
+        private static ulong ComputeDotProductOfTwoDocuments(Dictionary<string, int> firstDocumentWordsFrequencies, Dictionary<string, int> secondDocumentWordsFrequencies)
         {
-            long dotProduct = 0;
-            if(firstDocumentWordsFrequencies.Count > secondDocumentWordsFrequencies.Count)
+            ulong dotProduct = 0;
+            if (firstDocumentWordsFrequencies.Count > secondDocumentWordsFrequencies.Count)
             {
-                foreach(var frequency in secondDocumentWordsFrequencies)
-                    if (firstDocumentWordsFrequencies.ContainsKey(frequency.Key))
-                        dotProduct += firstDocumentWordsFrequencies[frequency.Key] * frequency.Value;
+                foreach (var frequency in firstDocumentWordsFrequencies)
+                    if (firstDocumentWordsFrequencies.ContainsKey(frequency.Key) && secondDocumentWordsFrequencies.ContainsKey(frequency.Key))
+                        dotProduct += Convert.ToUInt64(secondDocumentWordsFrequencies[frequency.Key] * frequency.Value);
             }
             else
             {
-                foreach (var frequency in firstDocumentWordsFrequencies)
-                    if (secondDocumentWordsFrequencies.ContainsKey(frequency.Key))
-                        dotProduct += secondDocumentWordsFrequencies[frequency.Key] * frequency.Value;
+                foreach (var frequency in secondDocumentWordsFrequencies)
+                    if (firstDocumentWordsFrequencies.ContainsKey(frequency.Key) && secondDocumentWordsFrequencies.ContainsKey(frequency.Key))
+                        dotProduct += Convert.ToUInt64(firstDocumentWordsFrequencies[frequency.Key] * frequency.Value);
             }
 
             return dotProduct;
