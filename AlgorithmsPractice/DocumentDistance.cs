@@ -9,6 +9,26 @@ namespace AlgorithmsPractice
 {
     public static class DocumentDistance
     {
+
+
+        /*
+         * //Main
+         * //----
+           string firstDocumentPath = @"D:\Projects\AlgorithmsPractice\AlgorithmsPractice\Resources\t8.shakespeare.txt";
+            string secondDocumentPath = @"D:\Projects\AlgorithmsPractice\AlgorithmsPractice\Resources\t9.bacon.txt";
+            double computedDistance = DocumentDistance.FindDistance(firstDocumentPath, secondDocumentPath);
+
+            Console.WriteLine(Environment.NewLine + " Distance computed = " + computedDistance);
+            Console.WriteLine(Environment.NewLine + " Actual distance = 0.52464214746385918");
+
+            //Document distance of 't1.verne.txt' and 't2.bobsey.txt' is 0.53338963892153224
+            //Document distance of 't2.bobsey.txt' and 't9.bacon.txt' is 0.52464214746385918
+            //Document distance of 't8.shakespeare.txt' and 't9.bacon.txt' is 0.55090929545369682
+
+
+
+            Console.WriteLine();
+         */
         public static double FindDistance(string firstDocumentPath, string secondDocumentPath)
         {
             double distance = 0;
