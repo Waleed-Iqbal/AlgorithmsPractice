@@ -32,5 +32,39 @@ namespace AlgorithmsPractice
 
             return numbers;
         }
+
+        public static int[] HeapSort(int[] numbers)
+        {
+            return numbers;
+        }
+
+        private static int[] MaxHeapify()
+        {
+            int[] numbers = { };
+
+            return numbers;
+        }
+
+        private static int Max()
+        {
+            int max = 0;
+
+            return max;
+        }
+
+        private static int ExtractMax()
+        {
+            int max = 0;
+            return max;
+        }
+
+        private static int[] BuildMaxHeap()
+        {
+            int[] numbers = { };
+
+
+            return numbers;
+        }
+
     }
 }
