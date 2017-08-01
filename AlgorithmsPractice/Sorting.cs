@@ -25,30 +25,48 @@ namespace AlgorithmsPractice
 
 
 
-        public static int[] MergeSort(int[] numbers, int left = 0, int right = 0)
+        public static int[] MergeSort(int[] numbers)
         {
-            if (right == 0) right = numbers.Length;
-            int middle = (left + right) / 2;
-            MergeSort(numbers, left, middle);
-            MergeSort(numbers, middle + 1, right);
-            MergeTwoHalves(numbers, left, right);
+            numbers = MergeSortRecursive(numbers, 0, numbers.Length);
 
             return numbers;
         }
 
-        private static void MergeTwoHalves(int[] numbers, int left, int right)
+        public static int[] MergeSortRecursive(int[] numbers, int left, int right)
         {
-            int middle = (left + right) / 2;
-            for (int i = left, j = middle + 1; i <= middle;)
+            if (left >= right)
             {
-                if(numbers[i] > numbers[j])
-                {
-                    numbers[i] = numbers[i] + numbers[j];
-                    numbers[j] = numbers[i] - numbers[j];
-                    numbers[i] = numbers[i] - numbers[j];
-
-                }
+                return new int[] { numbers[left] };
             }
+
+            int middle = (left + right) / 2;
+            int[] leftHalf = MergeSortRecursive(numbers, left, middle);
+            int[] rightHalf = MergeSortRecursive(numbers, middle + 1, right);
+            numbers = MergeTwoHalves(leftHalf, rightHalf);
+
+            return numbers;
+        }
+
+
+        private static int[] MergeTwoHalves(int[] left, int[] right)
+        {
+            int[] sorted = new int[left.Length + right.Length];
+            for (int i = 0, j = 0, index = 0; index < left.Length + right.Length; index++)
+            {
+                if (i < left.Length && j < right.Length && left[i] > right[j])
+                {
+                    sorted[index] = left[i];
+                    i++;
+                }
+                else if (j < right.Length)
+                {
+                    sorted[index] = right[j];
+                    j++;
+                }
+
+            }
+
+            return sorted;
         }
 
         public static int[] HeapSort(int[] numbers)
