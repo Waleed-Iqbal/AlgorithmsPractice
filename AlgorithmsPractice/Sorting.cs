@@ -41,7 +41,13 @@ namespace AlgorithmsPractice
             int middle = (left + right) / 2;
             for (int i = left, j = middle + 1; i <= middle;)
             {
+                if(numbers[i] > numbers[j])
+                {
+                    numbers[i] = numbers[i] + numbers[j];
+                    numbers[j] = numbers[i] - numbers[j];
+                    numbers[i] = numbers[i] - numbers[j];
 
+                }
             }
         }
 
