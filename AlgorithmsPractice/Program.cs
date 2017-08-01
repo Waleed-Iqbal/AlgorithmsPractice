@@ -11,9 +11,9 @@ namespace AlgorithmsPractice
     {
         static void Main(String[] args)
         {
-            int[] numbers = { 14, 33, 27, 10, 35, 19, 42, 44 };
+            int[] numbers = { 10, 5, 2, 7, 4, 9, 12, 1, 8, 6, 11, 3 };
 
-            numbers = Sorting.InsertionSort(numbers);
+            numbers = Sorting.MergeSort(numbers);
 
             Console.WriteLine();
             for (int i = 0; i < numbers.Length; i++)

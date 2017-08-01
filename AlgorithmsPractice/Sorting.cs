@@ -12,12 +12,12 @@ namespace AlgorithmsPractice
         {
             for (int i = 1; i < numbers.Length; i++) // iterating through unsorted array
                 if (numbers[i] < numbers[i - 1])
-                    for (int j = i; j >= 1 ; j--) // iterating through sorted array
+                    for (int j = i; j >= 1; j--) // iterating through sorted array
                         if (numbers[j] < numbers[j - 1])
                         {
                             // swaping numbers
                             numbers[j] = numbers[j] + numbers[j - 1];
-                            numbers[j-1] = numbers[j] - numbers[j - 1];
+                            numbers[j - 1] = numbers[j] - numbers[j - 1];
                             numbers[j] = numbers[j] - numbers[j - 1];
                         }
             return numbers;
@@ -25,12 +25,24 @@ namespace AlgorithmsPractice
 
 
 
-        public static int[] MergeSort(int[] numbers)
+        public static int[] MergeSort(int[] numbers, int left = 0, int right = 0)
         {
-
-
+            if (right == 0) right = numbers.Length;
+            int middle = (left + right) / 2;
+            MergeSort(numbers, left, middle);
+            MergeSort(numbers, middle + 1, right);
+            MergeTwoHalves(numbers, left, right);
 
             return numbers;
+        }
+
+        private static void MergeTwoHalves(int[] numbers, int left, int right)
+        {
+            int middle = (left + right) / 2;
+            for (int i = left, j = middle + 1; i <= middle;)
+            {
+
+            }
         }
 
         public static int[] HeapSort(int[] numbers)
