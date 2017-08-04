@@ -66,8 +66,8 @@ namespace AlgorithmsPractice
 
                 if( j >= right.Length)
                 {
-                    for(int k = i; k < right.Length; k++)
-                        sorted
+                    for (int k = i; k < right.Length; k++) ;
+                        //sorted
                 }
 
             }
