@@ -1,5 +1,6 @@
-﻿using System;
+﻿
 
+using System;
 namespace AlgorithmsPractice
 {
     class Program
@@ -8,7 +9,7 @@ namespace AlgorithmsPractice
         {
             int[] numbers = { 10, 5, 2, 7, 4, 9, 12, 1, 8, 6, 11, 3 };
 
-            numbers = Sorting.MergeSort(numbers);
+            numbers = MergeSort.Sort(numbers);
 
             Console.WriteLine();
             for (int i = 0; i < numbers.Length; i++)
