@@ -1,5 +1,5 @@
 ﻿
-namespace AlgorithmsPractice
+namespace AlgorithmsPractice { 
     public static class MergeSort
     {
         public static int[] Sort(int[] numbers)
