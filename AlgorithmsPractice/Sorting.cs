@@ -27,53 +27,92 @@ namespace AlgorithmsPractice
 
         public static int[] MergeSort(int[] numbers)
         {
-            numbers = MergeSortRecursive(numbers, 0, numbers.Length);
+            int[] tempArr = new int[numbers.Length];
+
+            numbers = MergeSortRecursive(numbers, tempArr, 0, numbers.Length - 1);
 
             return numbers;
         }
 
-        public static int[] MergeSortRecursive(int[] numbers, int left, int right)
+        public static int[] MergeSortRecursive(int[] numbers, int[] tempArr, int left, int right)
         {
-            if (left >= right)
+            if (left < right)
             {
-                return new int[] { numbers[left] };
-            }
 
-            int middle = (left + right) / 2;
-            int[] leftHalf = MergeSortRecursive(numbers, left, middle);
-            int[] rightHalf = MergeSortRecursive(numbers, middle + 1, right);
-            numbers = MergeTwoHalves(leftHalf, rightHalf);
+                int middle = (left + right) / 2;
+                MergeSortRecursive(numbers, tempArr, left, middle);
+                MergeSortRecursive(numbers, tempArr, middle + 1, right);
+                MergeTwoHalves(numbers, tempArr, left, middle, right);
+            }
 
             return numbers;
         }
 
 
-        private static int[] MergeTwoHalves(int[] left, int[] right)
+        private static int[] MergeTwoHalves(int[] numbers, int[] tempArr, int left, int middle, int right)
         {
-            int[] sorted = new int[left.Length + right.Length];
-            for (int i = 0, j = 0, index = 0; index < left.Length + right.Length; index++)
+            int[] leftArr = new int[middle - left + 1];
+            int[] rightArr = new int[right - middle];
+
+            for (int i = 0; i < leftArr.Length; i++)
+                leftArr[i] = numbers[i + left];
+
+            for (int i = 0; i < rightArr.Length; i++)
+                rightArr[i] = numbers[i + middle + 1];
+
+            int leftRef = 0;
+            int rightRef = 0;
+            for (int i = left; i <= right; i++)
             {
-                if (i < left.Length && j < right.Length && left[i] > right[j])
+                if (rightRef == rightArr.Length)
                 {
-                    sorted[index] = left[i];
-                    i++;
-                }
-                else if (j < right.Length)
-                {
-                    sorted[index] = right[j];
-                    j++;
-                }
-
-                if( j >= right.Length)
-                {
-                    for (int k = i; k < right.Length; k++) ;
-                        //sorted
+                    int k = i;
+                    for (int j = leftRef; j < leftArr.Length; j++)
+                    {
+                        tempArr[k] = leftArr[leftRef];
+                        leftRef++; k++;
+                    }
+                    break;
                 }
 
+
+                if (leftRef == leftArr.Length)
+                {
+                    int k = i;
+
+                    for (int j = rightRef; j < rightArr.Length; j++)
+                    {
+                        tempArr[k] = rightArr[rightRef];
+                        rightRef++; k++;
+                    }
+                    break;
+                }
+
+                if (leftArr[leftRef] < rightArr[rightRef])
+                {
+                    tempArr[i] = leftArr[leftRef];
+                    leftRef++;
+                }
+                else
+                {
+                    tempArr[i] = rightArr[rightRef];
+                    rightRef++;
+                }
             }
 
-            return sorted;
+            for (int i = left; i <= right; i++)
+                numbers[i] = tempArr[i];
+
+            return numbers;
         }
+
+
+
+
+
+
+
+
 
         public static int[] HeapSort(int[] numbers)
         {
