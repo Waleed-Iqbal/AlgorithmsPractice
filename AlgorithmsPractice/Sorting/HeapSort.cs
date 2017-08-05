@@ -8,9 +8,9 @@ namespace AlgorithmsPractice
         /// </summary>
         /// <param name="numbers"></param>
         /// <returns></returns>
-        public static int[] Sort(int[] numbers)
+        public static void Sort(int[] numbers)
         {
-            return numbers;
+
         }
 
         private static int[] MaxHeapify()
@@ -20,25 +20,8 @@ namespace AlgorithmsPractice
             return numbers;
         }
 
-        private static int Max()
+        private static void BuildMaxHeap(int[] numbers)
         {
-            int max = 0;
-
-            return max;
-        }
-
-        private static int ExtractMax()
-        {
-            int max = 0;
-            return max;
-        }
-
-        private static int[] BuildMaxHeap()
-        {
-            int[] numbers = { };
-
-
-            return numbers;
         }
     }
 }
