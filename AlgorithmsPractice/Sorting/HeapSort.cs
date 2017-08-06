@@ -15,10 +15,10 @@ namespace AlgorithmsPractice
         /// <returns></returns>
         public static void Sort(int[] numbers)
         {
-          Heap.numbers = numbers;
-          Heap.heapSize = numbers.Length-1;
+            Heap.numbers = numbers;
+            Heap.heapSize = numbers.Length - 1;
             BuildMaxHeap(numbers);
-            for(int i = numbers.Length - 1; i > 1; i--)
+            for (int i = numbers.Length - 1; i > 1; i--)
             {
                 numbers[0] = numbers[0] + numbers[i];
                 numbers[i] = numbers[0] - numbers[i];
@@ -42,7 +42,7 @@ namespace AlgorithmsPractice
             int leftNodeIndex = index * 2;
             int rightNodeIndex = leftNodeIndex + 1;
             int largest = index;
-            if (leftNodeIndex < Heap.heapSize && numbers[leftNodeIndex] > numbers[index] )
+            if (leftNodeIndex < Heap.heapSize && numbers[leftNodeIndex] > numbers[index])
                 largest = leftNodeIndex;
             if (rightNodeIndex < Heap.heapSize && numbers[rightNodeIndex] > numbers[largest])
                 largest = rightNodeIndex;
