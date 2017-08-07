@@ -15,10 +15,12 @@ namespace AlgorithmsPractice.Sorting
                 this.data = number;
                 this.left = null;
                 this.right = null;
+                this.parent = null;
             }
             public int data;
             public Node left;
             public Node right;
+            public Node parent;
         }
 
         /// <summary>
@@ -29,20 +31,32 @@ namespace AlgorithmsPractice.Sorting
         public static Node CreateBST(int[] numbers)
         {
             Node root = new Node(numbers[0]);
+            Node traverser = new Node(0);
+            traverser = root;
             int totalNodes = numbers.Length;
-            for(int i = 1; i < totalNodes; i++)
+            for (int i = 1; i < totalNodes; i++)
             {
                 Node node = new Node(numbers[i]);
-                Node traverser = new Node(0);
                 traverser = root;
-                while (true)
+                while (node.parent == null)
                 {
 
-                if (node.data > root.data)
-                {
-                    root.right = node;
-                }
-                else root.left = node;
+                    if (node.data >= root.data && traverser.right == null)
+                    {
+                        traverser.right = node;
+                        node.parent = traverser;
+                    }
+
+                    else if (node.data < root.data && traverser.left == null)
+                    {
+                        traverser.left = node;
+                        node.parent = traverser;
+                    }
+                    else if (node.data >= root.data && traverser.right != null)
+                        traverser = traverser.right;
+                    else if (node.data < root.data && traverser.left != null)
+                        traverser = traverser.left;
+
                 }
             }
 
