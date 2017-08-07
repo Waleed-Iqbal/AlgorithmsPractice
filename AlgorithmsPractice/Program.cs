@@ -7,9 +7,9 @@ namespace AlgorithmsPractice
     {
         static void Main(String[] args)
         {
-            int[] numbers = { 10, 5, 2, 7, 4, 9, 12, 1, 8, 6, 11, 3 };
+            int[] numbers = { 10, 5, 2, 7};
 
-            HeapSort.Sort(numbers);
+            BinarySearchTree.Node root = BinarySearchTree.CreateBST(numbers);
 
             Console.WriteLine();
             for (int i = 0; i < numbers.Length; i++)

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AlgorithmsPractice.Sorting
+namespace AlgorithmsPractice
 {
     public static class BinarySearchTree
     {
         public class Node
         {
-            public Node(int number)
+            public Node(int number = 0)
             {
                 this.data = number;
                 this.left = null;
@@ -31,30 +31,31 @@ namespace AlgorithmsPractice.Sorting
         public static Node CreateBST(int[] numbers)
         {
             Node root = new Node(numbers[0]);
-            Node traverser = new Node(0);
-            traverser = root;
             int totalNodes = numbers.Length;
+            Node traverser = root;
             for (int i = 1; i < totalNodes; i++)
             {
                 Node node = new Node(numbers[i]);
                 traverser = root;
-                while (node.parent == null)
+                while (true)
                 {
 
-                    if (node.data >= root.data && traverser.right == null)
+                    if (node.data >= traverser.data && traverser.right == null)
                     {
                         traverser.right = node;
-                        node.parent = traverser;
+                        break;
                     }
 
-                    else if (node.data < root.data && traverser.left == null)
+                    else if (node.data < traverser.data && traverser.left == null)
                     {
                         traverser.left = node;
-                        node.parent = traverser;
+                        break;
                     }
-                    else if (node.data >= root.data && traverser.right != null)
+
+                    else if (node.data >= traverser.data && traverser.right != null)
                         traverser = traverser.right;
-                    else if (node.data < root.data && traverser.left != null)
+
+                    else if (node.data < traverser.data && traverser.left != null)
                         traverser = traverser.left;
 
                 }
