@@ -10,26 +10,51 @@ namespace AlgorithmsPractice.Sorting
     {
         public class Node
         {
-            int data;
-            Node left;
-            Node right;
+            public Node(int number)
+            {
+                this.data = number;
+                this.left = null;
+                this.right = null;
+            }
+            public int data;
+            public Node left;
+            public Node right;
         }
 
         /// <summary>
-        /// Creates a BST for the given array and returns root
+        /// Creates a BST for the given array and returns root. Currently, this is not balanced.
         /// </summary>
         /// <param name="numbers">Array of integers</param>
         /// <returns></returns>
         public static Node CreateBST(int[] numbers)
         {
-            Node node = new Node();
+            Node root = new Node(numbers[0]);
+            int totalNodes = numbers.Length;
+            for(int i = 1; i < totalNodes; i++)
+            {
+                Node node = new Node(numbers[i]);
+                Node traverser = new Node(0);
+                traverser = root;
+                while (true)
+                {
 
+                if (node.data > root.data)
+                {
+                    root.right = node;
+                }
+                else root.left = node;
+                }
+            }
 
-            return node;
+            return root;
         }
 
-
-        private static void AddNewNode(Node node)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="node">Node to be inserted</param>
+        /// <param name="root">Root node (start of the BST)</param>
+        private static void AddNewNode(Node node, Node root)
         {
 
         }
