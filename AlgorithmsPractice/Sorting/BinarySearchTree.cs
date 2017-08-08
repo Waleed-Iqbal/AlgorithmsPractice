@@ -45,24 +45,51 @@ namespace AlgorithmsPractice
                         traverser.right = node;
                         break;
                     }
-
-                    else if (node.data < traverser.data && traverser.left == null)
+                    else if (node.data <= traverser.data && traverser.left == null)
                     {
                         traverser.left = node;
                         break;
                     }
-
                     else if (node.data >= traverser.data && traverser.right != null)
                         traverser = traverser.right;
-
-                    else if (node.data < traverser.data && traverser.left != null)
+                    else if (node.data <= traverser.data && traverser.left != null)
                         traverser = traverser.left;
-
                 }
             }
-
             return root;
         }
+
+
+        public static void InOrderTraversal(Node root)
+        {
+            if (root != null)
+            {
+                InOrderTraversal(root.left);
+                Console.Write(root.data + ", ");
+                InOrderTraversal(root.right);
+            }
+        }
+
+        public static void PreOrderTraversal(Node root)
+        {
+            if (root != null)
+            {
+                Console.WriteLine(root.data + ", ");
+                PreOrderTraversal(root.left);
+                PreOrderTraversal(root.right);
+            }
+        }
+
+        public static void PostOrderTraversal(Node root)
+        {
+            if (root != null)
+            {
+                PreOrderTraversal(root.left);
+                PreOrderTraversal(root.right);
+                Console.Write(root.data + ", ");
+            }
+        }
+
 
         /// <summary>
         /// 
