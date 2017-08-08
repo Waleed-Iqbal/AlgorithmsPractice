@@ -60,6 +60,15 @@ namespace AlgorithmsPractice
         }
 
 
+        public static void GetMax(Node root)
+        {
+            if(root.right == null)
+                Console.WriteLine("Max is: " + root.data);
+            else
+                GetMax(root.right);
+        }
+
+
         public static void InOrderTraversal(Node root)
         {
             if (root != null)
@@ -74,7 +83,7 @@ namespace AlgorithmsPractice
         {
             if (root != null)
             {
-                Console.WriteLine(root.data + ", ");
+                Console.Write(root.data + ", ");
                 PreOrderTraversal(root.left);
                 PreOrderTraversal(root.right);
             }
