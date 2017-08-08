@@ -13,18 +13,9 @@ namespace AlgorithmsPractice
                 Console.Write(numbers[i] + ", ");
 
             BinarySearchTree.Node root = BinarySearchTree.CreateBST(numbers);
-
-            Console.WriteLine(Environment.NewLine + Environment.NewLine + "After PreOrder:");
-            BinarySearchTree.PreOrderTraversal(root);
-
-
-            Console.WriteLine(Environment.NewLine + Environment.NewLine + "After InOrder:");
-            BinarySearchTree.InOrderTraversal(root);
-
-
-            Console.WriteLine(Environment.NewLine + Environment.NewLine + "After PostOrder:");
-            BinarySearchTree.PostOrderTraversal(root);
-
+            Console.WriteLine();
+            BinarySearchTree.ShowMax(root); 
+            BinarySearchTree.ShowMin(root);
 
             Console.WriteLine();
             Console.WriteLine();

@@ -23,6 +23,8 @@ namespace AlgorithmsPractice
             public Node parent;
         }
 
+        
+
         /// <summary>
         /// Creates a BST for the given array and returns root. Currently, this is not balanced.
         /// </summary>
@@ -60,15 +62,21 @@ namespace AlgorithmsPractice
         }
 
 
-        public static void GetMax(Node root)
+        public static void ShowMax(Node root)
         {
             if(root.right == null)
                 Console.WriteLine("Max is: " + root.data);
             else
-                GetMax(root.right);
+                ShowMax(root.right);
         }
 
-
+        public static void ShowMin(Node root)
+        {
+            if (root.left == null)
+                Console.WriteLine("Min is: " + root.data);
+            else
+                ShowMin(root.left);
+        }
         public static void InOrderTraversal(Node root)
         {
             if (root != null)
