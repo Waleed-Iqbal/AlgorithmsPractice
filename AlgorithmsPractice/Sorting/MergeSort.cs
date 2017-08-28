@@ -70,7 +70,7 @@ namespace AlgorithmsPractice {
                     rightRef++;
                 }
             }
-
+            // need some comments here
             for (int i = left; i <= right; i++)
                 numbers[i] = tempArr[i];
 
