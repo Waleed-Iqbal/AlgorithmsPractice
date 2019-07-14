@@ -9,11 +9,10 @@
   }
   
   
-  
   firstOne = ()=> {
     appendOutput("result");
   }
-  
+
   
   algos = {
     firstOne:firstOne
