@@ -10,13 +10,17 @@
   }
   
   
-  firstOne = ()=> {
+  Array_FindPairWithGivenSum = () => {
+    /**
+     * https://www.techiedelight.com/find-pair-with-given-sum-array/
+     * Given an unsorted array of integers, find a pair with given sum in it.
+    */
     appendOutput("result");
   }
 
   
   algos = {
-    firstOne:firstOne
+    firstOne: firstOne
   };
   
   algos.firstOne();

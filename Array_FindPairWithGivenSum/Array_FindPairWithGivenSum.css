@@ -1,5 +1,9 @@
-/********************/
 
+
+input {
+  width: 30%;
+  height: 20px;
+}
 
 #output {
   width: 98vw;
@@ -8,5 +12,3 @@
   border: 3px solid black;
   color: red;
 }
-
-/********************/
