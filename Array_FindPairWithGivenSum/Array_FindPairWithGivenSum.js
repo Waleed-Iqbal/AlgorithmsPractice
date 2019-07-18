@@ -11,6 +11,7 @@
     sum: 10
   };
 
+  // O(n^2)
   let bruteForceSolution = () => {
     console.log("BRUTE FORCE SOLUTION ...");
 
@@ -42,6 +43,38 @@
     console.log(`Time taken: ${totalTimeTaken} milliseconds`);
   }
 
-  bruteForceSolution();
+
+  //
+  let betterSolution = () => {
+    let numbers = testInput1.numbers;
+    let targetSum = testInput1.sum;
+
+    numbers = numbers.sort((a,b) => a > b); // sort in descending order
+
+    numbers.sort((a, b) => b - a);
+    numbers = numbers.filter(number => number < targetSum);
+
+    let lowIndex = 0;
+    let highIndex = numbers.length-1;
+    let isFound = false;
+
+    while(lowIndex < highIndex) {
+      let calculatedSum = numbers[lowIndex] + numbers[highIndex];
+      if (calculatedSum === targetSum){
+        console.log(`Sum found at indices ${lowIndex} and ${highIndex}. Values are ${numbers[lowIndex]}, ${numbers[highIndex]}`);
+        isFound = true;
+      }
+      if (calculatedSum > targetSum)
+        lowIndex++
+      else highIndex--;
+    }
+
+    if(!isFound)
+      console.log("No such pair found")
+  }
+
+
+  //bruteForceSolution();
+  betterSolution();
 
 })();
