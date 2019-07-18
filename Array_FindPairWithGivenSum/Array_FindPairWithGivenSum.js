@@ -44,7 +44,7 @@
   }
 
 
-  //
+  // O (nlog(n))
   let betterSolution = () => {
     let numbers = testInput1.numbers;
     let targetSum = testInput1.sum;
