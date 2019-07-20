@@ -21,7 +21,7 @@
     }
   }
 
-  let getRandomInput = (count) => {
+  let getRandomNumbers = (count) => {
     let numbers = [];
     numbers.length;
     while (numbers.length < count) {
@@ -33,8 +33,8 @@
   }
 
   let testInput = {
-    numbers: getRandomInput(1000),
-    sum: 10
+    numbers: getRandomNumbers(500),
+    sum: 100
   };
 
 
@@ -95,12 +95,13 @@
    *
    * @param {callback} solution Name of the function to test
    */
-  let testASolution = (callback, showInput = false) => {
+  let testASolution = (callback, showInput = true) => {
 
     if(showInput){
       let input = "";
       testInput.numbers.map(number => input += number + ", ");
-      console.log(`INPUT: ${input}`);
+      console.log(`INPUT:\n${input}`);
+      console.log(`REQUIRED SUM:\n${testInput.sum}`);
     }
 
     timeCalculations.start();
@@ -111,6 +112,6 @@
 
 
   testASolution(bruteForceSolution); // O(n^2)
-  testASolution(betterSolution); // O(nlog(n))
+  testASolution(betterSolution, false); // O(nlog(n))
 
 })();
