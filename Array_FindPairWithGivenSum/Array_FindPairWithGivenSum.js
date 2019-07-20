@@ -6,20 +6,47 @@
 
 (() => {
 
-  let testInput1 = {
-    numbers: [8, 7, 2, 5, 3, 1],
+  let timeCalculations = {
+    start() {
+      this.startTime = performance.now()
+    },
+    end() {
+      this.endTime = performance.now()
+    },
+    startTime: null,
+    endTime: null,
+    totalTime() {
+      let timeElapsed = parseFloat(this.endTime - this.startTime).toFixed(5);
+      console.log(`Time elapsed: ${timeElapsed}`);
+    }
+  }
+
+  let getRandomInput = (count) => {
+    let numbers = [];
+    numbers.length;
+    while (numbers.length < count) {
+      let candidateNumber = Math.floor(Math.random() * count);
+      if(numbers.indexOf(candidateNumber) < 0)
+      numbers.push(candidateNumber);
+    }
+    return numbers;
+  }
+
+  let testInput = {
+    numbers: getRandomInput(1000),
     sum: 10
   };
 
-  // O(n^2)
-  let bruteForceSolution = () => {
-    console.log("BRUTE FORCE SOLUTION ...");
 
-    let numbers = testInput1.numbers;
-    let sum = testInput1.sum;
+
+  let bruteForceSolution = () => {
+
+    console.log("BRUTE FORCE SOLUTION O(n^2) ...");
+
+    let numbers = testInput.numbers;
+    let sum = testInput.sum;
     let isPairFound = false;
 
-    let timeStart = performance.now();
     numbers.map((comparator, index) => {
       for (let j = index + 1; j < numbers.length; j++) {
 
@@ -32,27 +59,18 @@
         }
       }
     });
-
-    let timeEnd = performance.now();
-    let totalTimeTaken = parseFloat(timeEnd - timeStart).toFixed(5);
-
-    if (isPairFound) {
-      console.log(`Brute force time complexity: O(n^2)`);
-      console.log(`Brute force space complexity: O(1)`);
-    }
-    console.log(`Time taken: ${totalTimeTaken} milliseconds`);
   }
 
 
-  // O (nlog(n))
   let betterSolution = () => {
-    let numbers = testInput1.numbers;
-    let targetSum = testInput1.sum;
 
-    numbers = numbers.sort((a,b) => a > b); // sort in descending order
+    console.log("A better solution O(nlogn) ...")
 
-    numbers.sort((a, b) => b - a);
-    numbers = numbers.filter(number => number < targetSum);
+    let numbers = testInput.numbers;
+    let targetSum = testInput.sum;
+
+    numbers = numbers.sort((a,b) => b - a); // sort in descending order
+    numbers = numbers.filter(number => number <= targetSum);
 
     let lowIndex = 0;
     let highIndex = numbers.length-1;
@@ -73,8 +91,26 @@
       console.log("No such pair found")
   }
 
+  /**
+   *
+   * @param {callback} solution Name of the function to test
+   */
+  let testASolution = (callback, showInput = false) => {
 
-  //bruteForceSolution();
-  betterSolution();
+    if(showInput){
+      let input = "";
+      testInput.numbers.map(number => input += number + ", ");
+      console.log(`INPUT: ${input}`);
+    }
+
+    timeCalculations.start();
+    callback();
+    timeCalculations.end();
+    timeCalculations.totalTime();
+  }
+
+
+  testASolution(bruteForceSolution); // O(n^2)
+  testASolution(betterSolution); // O(nlog(n))
 
 })();
