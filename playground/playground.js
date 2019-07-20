@@ -6,19 +6,16 @@
     data: "address",
 
     methodOld: function() {
-      console.log(`old ${this.data}`);
+      console.log("methodOld arugments: ", arguments);
     },
 
-    methodNew: () => {
-      return () => {
-
-        console.log(`new ${testArrow.data}`);
-      };
+    methodArrow: () => {
+      console.log("methodNew this: ", this);
     }
   };
 
 
   testArrow.methodOld();
-  testArrow.methodNew()();
+  testArrow.methodArrow();
 
 })();
