@@ -37,11 +37,14 @@
     sum: 2200
   };
 
+  let showLog = (log, displayLog = true) => {
+    displayLog && console.log(log);
+  }
 
 
-  let bruteForceSolution = () => {
+  let bruteForceSolution = (showOutputs=false) => {
 
-    console.log("BRUTE FORCE SOLUTION O(n^2)");
+    showLog("BRUTE FORCE SOLUTION O(n^2)");
 
     let numbers = testInput.numbers;
     let sum = testInput.sum;
@@ -53,18 +56,21 @@
         const comparer = numbers[j];
 
         if (sum === comparator + comparer) {
-          console.log(`Sum found at indices ${index} and ${j}. Values are ${comparator}, ${numbers[j]}`);
+          showLog(`Sum found at indices ${index} and ${j}. Values are ${comparator}, ${numbers[j]}`, showOutputs);
           isPairFound = true;
           break;
         }
       }
     });
+
+    if(!isPairFound)
+      showLog("No such pair found", showOutputs);
   }
 
 
-  let betterSolution = () => {
+  let betterSolution = (showOutputs=false) => {
 
-    console.log("A BETTER SOLUTION: O(nlogn)")
+    showLog("A BETTER SOLUTION: O(nlogn)")
 
     let numbers = testInput.numbers;
     let targetSum = testInput.sum;
@@ -74,54 +80,55 @@
 
     let lowIndex = 0;
     let highIndex = numbers.length-1;
-    let isFound = false;
+    let isPairFound = false;
 
     while(lowIndex < highIndex) {
       let calculatedSum = numbers[lowIndex] + numbers[highIndex];
       if (calculatedSum === targetSum){
-        console.log(`Sum found at indices ${lowIndex} and ${highIndex}. Values are ${numbers[lowIndex]}, ${numbers[highIndex]}`);
-        isFound = true;
+        showLog(`Sum found at indices ${lowIndex} and ${highIndex}. Values are ${numbers[lowIndex]}, ${numbers[highIndex]}`, showOutputs);
+        isPairFound = true;
       }
       if (calculatedSum > targetSum)
         lowIndex++
       else highIndex--;
     }
 
-    if(!isFound)
-      console.log("No such pair found")
+    if(!isPairFound)
+      showLog("No such pair found", showOutputs);
   }
 
 
-  let muchBetterSolution = () => {
-    console.log("A MUCH BETTER SOLUTION: O(n)");
+  let muchBetterSolution = (showOutputs = false) => {
+
+    showLog( "A MUCH BETTER SOLUTION: O(n)");
 
     let numbers = testInput.numbers;
     let targetSum = testInput.sum;
     let numbersMap = {};
-    let isFound = false;
+    let isPairFound = false;
 
     numbers.map((value, index) => {
       let difference = Math.abs(targetSum-value);
       if(numbersMap.hasOwnProperty(difference) && (difference + value === targetSum)) {
-        console.log(`Sum found at indices ${numbersMap[difference]} and ${index}. Values are ${difference}, ${value}`);
-        isFound = true;
+        showLog(`Sum found at indices ${numbersMap[difference]} and ${index}. Values are ${difference}, ${value}`, showOutputs);
+        isPairFound = true;
       }
 
       if(!numbersMap[value])
         numbersMap[value] = index;
     });
 
-    if(!isFound)
-      console.log("No such pair found")
+    if(!isPairFound)
+      showLog("No such pair found", showOutputs);
 
   }
 
   /**
    * @param {callback} solution Name of the function to test
    */
-  let testASolution = (callback, showInput = true) => {
+  let testASolution = (callback, options) => {
 
-    if(showInput){
+    if(options.showInput){
       let input = "";
       testInput.numbers.map(number => input += number + ", ");
       console.log(`INPUT:\n${input}`);
@@ -129,14 +136,18 @@
     }
 
     timeCalculations.start();
-    callback();
+    callback(options.showOutputs);
     timeCalculations.end();
     timeCalculations.totalTime();
   }
 
+  let options = {
+    showInputs: true,
+    showOutputs: false
+  }
 
-  testASolution(bruteForceSolution); // O(n^2)
-  testASolution(betterSolution, false); // O(nlog(n))
-  testASolution(muchBetterSolution, false); // O(n)
+  testASolution(bruteForceSolution, options); // O(n^2)
+  testASolution(betterSolution, options); // O(nlog(n))
+  testASolution(muchBetterSolution, options); // O(n)
 
 })();
