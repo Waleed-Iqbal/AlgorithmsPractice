@@ -6,48 +6,16 @@
 
 (() => {
 
-  let timeCalculations = {
-    start() {
-      this.startTime = performance.now()
-    },
-    end() {
-      this.endTime = performance.now()
-    },
-    startTime: null,
-    endTime: null,
-    totalTime() {
-      let timeElapsed = parseFloat(this.endTime - this.startTime).toFixed(5);
-      console.log(`Time elapsed: ${timeElapsed}`);
-    }
-  }
-
-  let getRandomNumbers = (count) => {
-    let numbers = [];
-    numbers.length;
-    while (numbers.length < count) {
-      let candidateNumber = Math.floor(Math.random() * count);
-      if (numbers.indexOf(candidateNumber) < 0)
-        numbers.push(candidateNumber);
-    }
-    return numbers;
-  }
-
-  let testInput = {
-    numbers: getRandomNumbers(5000),
-    sum: 2200
-  };
-
-  let showLog = (log, displayLog = true) => {
-    displayLog && console.log(log);
-  }
-
+  let showLog = globals.showLog;
+  let testData = globals.testData;
+  let testASolution = globals.testASolution;
 
   let bruteForceSolution = (showOutputs = false) => {
 
     showLog("A BRUTE FORCE SOLUTION: O(n^2)");
 
-    let numbers = testInput.numbers;
-    let sum = testInput.sum;
+    let numbers = testData.numbers;
+    let sum = testData.sum;
     let isPairFound = false;
 
     numbers.map((comparator, index) => {
@@ -72,8 +40,8 @@
 
     showLog("A BETTER SOLUTION: O(nlogn)")
 
-    let numbers = testInput.numbers;
-    let targetSum = testInput.sum;
+    let numbers = testData.numbers;
+    let targetSum = testData.sum;
 
     numbers = numbers.sort((a, b) => b - a); // sort in descending order
     numbers = numbers.filter(number => number <= targetSum);
@@ -102,8 +70,8 @@
 
     showLog("A MUCH BETTER SOLUTION: O(n)");
 
-    let numbers = testInput.numbers;
-    let targetSum = testInput.sum;
+    let numbers = testData.numbers;
+    let targetSum = testData.sum;
     let numbersMap = {};
     let isPairFound = false;
 
@@ -123,23 +91,7 @@
 
   }
 
-  /**
-   * @param {callback} solution Name of the function to test
-   */
-  let testASolution = (callback, displayOptions) => {
 
-    if (displayOptions.showInputs) {
-      let input = "";
-      testInput.numbers.map(number => input += number + ", ");
-      console.log(`INPUT:\n${input}`);
-      console.log(`REQUIRED SUM: ${testInput.sum}`);
-    }
-
-    timeCalculations.start();
-    callback(displayOptions.showOutputs);
-    timeCalculations.end();
-    timeCalculations.totalTime();
-  }
 
   let displayOptions = {
     showInputs: false,
