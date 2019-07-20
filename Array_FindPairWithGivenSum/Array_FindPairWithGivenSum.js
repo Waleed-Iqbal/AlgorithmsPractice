@@ -33,15 +33,15 @@
   }
 
   let testInput = {
-    numbers: getRandomNumbers(500),
-    sum: 100
+    numbers: getRandomNumbers(5000),
+    sum: 2200
   };
 
 
 
   let bruteForceSolution = () => {
 
-    console.log("BRUTE FORCE SOLUTION O(n^2) ...");
+    console.log("BRUTE FORCE SOLUTION O(n^2)");
 
     let numbers = testInput.numbers;
     let sum = testInput.sum;
@@ -64,7 +64,7 @@
 
   let betterSolution = () => {
 
-    console.log("A better solution O(nlogn) ...")
+    console.log("A BETTER SOLUTION: O(nlogn)")
 
     let numbers = testInput.numbers;
     let targetSum = testInput.sum;
@@ -91,8 +91,32 @@
       console.log("No such pair found")
   }
 
+
+  let muchBetterSolution = () => {
+    console.log("A MUCH BETTER SOLUTION: O(n)");
+
+    let numbers = testInput.numbers;
+    let targetSum = testInput.sum;
+    let numbersMap = {};
+    let isFound = false;
+
+    numbers.map((value, index) => {
+      let difference = Math.abs(targetSum-value);
+      if(numbersMap.hasOwnProperty(difference) && (difference + value === targetSum)) {
+        console.log(`Sum found at indices ${numbersMap[difference]} and ${index}. Values are ${difference}, ${value}`);
+        isFound = true;
+      }
+
+      if(!numbersMap[value])
+        numbersMap[value] = index;
+    });
+
+    if(!isFound)
+      console.log("No such pair found")
+
+  }
+
   /**
-   *
    * @param {callback} solution Name of the function to test
    */
   let testASolution = (callback, showInput = true) => {
@@ -101,7 +125,7 @@
       let input = "";
       testInput.numbers.map(number => input += number + ", ");
       console.log(`INPUT:\n${input}`);
-      console.log(`REQUIRED SUM:\n${testInput.sum}`);
+      console.log(`REQUIRED SUM: ${testInput.sum}`);
     }
 
     timeCalculations.start();
@@ -113,5 +137,6 @@
 
   testASolution(bruteForceSolution); // O(n^2)
   testASolution(betterSolution, false); // O(nlog(n))
+  testASolution(muchBetterSolution, false); // O(n)
 
 })();
