@@ -22,7 +22,7 @@
   // [0]
 
 
-  let allSubArrayWithZeroSumExist = (numbers) => {
+  let bruteForceSolution = (numbers) => {
 
 
 
