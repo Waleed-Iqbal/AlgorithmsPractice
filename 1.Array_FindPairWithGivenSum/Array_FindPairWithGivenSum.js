@@ -7,8 +7,14 @@
 (() => {
 
   let showLog = globals.showLog;
-  let testData = globals.testData;
   let testASolution = globals.testASolution;
+
+
+  let testData = {
+    numbers: this.globals.getRandomNumbers(8000),
+    sum: 2250
+  }
+
 
   let bruteForceSolution = (showOutputs = false) => {
 
@@ -91,15 +97,13 @@
 
   }
 
-
-
   let displayOptions = {
     showInputs: false,
     showOutputs: false
   }
 
-  testASolution(bruteForceSolution, { showInputs: true, showOutputs: displayOptions.showOutputs }); // O(n^2)
-  testASolution(betterSolution, displayOptions); // O(nlog(n))
-  testASolution(muchBetterSolution, displayOptions); // O(n)
+  testASolution(bruteForceSolution, testData, { showInputs: false, showOutputs: displayOptions.showOutputs }); // O(n^2)
+  testASolution(betterSolution, testData, displayOptions); // O(nlog(n))
+  testASolution(muchBetterSolution, testData, displayOptions); // O(n)
 
 })();

@@ -6,21 +6,30 @@
 
 (() => {
 
+  let testASolution = globals.testASolution;
+  let showLog = globals.showLog;
 
-  let testNumbers = [3, 4, -7, 3, 1, 3, 1, -4, -2, -2];
+  let testData = {
+    numbers: [3, 4, -7, 3, 1, 3, 1, -4, -2, -2]
+  };
 
 
-  let doesSubArrayWithZeroSumExist = (numbers) => {
+  let doesSubArrayWithZeroSumExist = (showOutputs = false) => {
     let sum = 0;
-    numbers.map(value => {
+    testData.numbers.map(value => {
       sum += value;
       if (sum === 0) {
-        console.log("sub array with zero sum found");
+        showLog("sub array with zero sum found");
         return;
       }
     });
   }
 
-  doesSubArrayWithZeroSumExist(testNumbers);
+  let displayOptions = {
+    showInputs: false,
+    showOutputs: false
+  }
+
+  testASolution(doesSubArrayWithZeroSumExist, testData, displayOptions);
 
 })();

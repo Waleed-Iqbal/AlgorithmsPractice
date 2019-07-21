@@ -37,10 +37,6 @@
     return numbers;
   }
 
-  let testData = {
-    numbers: getRandomNumbers(5000),
-    sum: 2200
-  };
 
   /**
    *
@@ -52,17 +48,43 @@
   }
 
 
-    /**
-   * @param {callback} solution Name of the function to test
-   * @param {displayOptions} displayOptions to display inputs and outputs
-   */
-  let testASolution = (callback, displayOptions) => {
+  let displayAllInputs = (testData) => {
+    var allTestData = Object.entries(testData);
+
+    let input = "";
+    allTestData.map((value) => {
+      let inputName = value[0]; // first index is always name
+      let inputValue = value[1]; // second index is always the value
+
+      input += `${inputName.toUpperCase()}:\n`;
+
+      if (inputValue.constructor === Array) {
+        inputValue.map(val => {
+          input += `${val.toString()}, `;
+        });
+      }
+      else if (inputValue.constructor === String || inputValue.constructor === Number || inputValue.constructor === Boolean)
+        input += inputValue.toString();
+      else if (inputValue.constructor === Object) {
+        input += JSON.stringify(inputValue);
+      }
+
+      input += `\n`;
+    });
+
+    console.log(input);
+
+  }
+
+
+  /**
+ * @param {callback} solution Name of the function to test
+ * @param {displayOptions} displayOptions to display inputs and outputs
+ */
+  let testASolution = (callback, testData, displayOptions) => {
 
     if (displayOptions.showInputs) {
-      let input = "";
-      testData.numbers.map(number => input += number + ", ");
-      console.log(`INPUT:\n${input}`);
-      console.log(`REQUIRED SUM: ${testData.sum}`);
+      displayAllInputs(testData);
     }
 
     timeCalculations.start();
@@ -73,9 +95,9 @@
 
 
   return globals = {
-    testData: testData,
     showLog: showLog,
-    testASolution: testASolution
+    testASolution: testASolution,
+    getRandomNumbers: getRandomNumbers
   };
 
 
