@@ -6,36 +6,36 @@
 
 (() => {
 
-  let showLog = globals.showLog;
-  let testASolution = globals.testASolution;
-
-
   let testInput = {
-    numbers: [0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1]
-  };
+   numbers: [0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1]
+  }
 
-  let linearSolution = (showOutputs) => {
+  let sortBinaryArrayInLinearTime = (input) => {
+    input = input || testInput.numbers;
+    let testOutPut = {
+      numbers: []
+    }
     // if 0 is found, prepend it to new array, for 1, append it to array
 
-    let sortedBirnayrArray = [];
-    let log = "";
+    let sortedBinaryArray = [];
 
     testInput.numbers.map(value => {
       if (value == 1)
-        sortedBirnayrArray.push(value);
+      sortedBinaryArray.push(value);
       else
-        sortedBirnayrArray.unshift(value);
+      sortedBinaryArray.unshift(value);
     });
 
-    showLog(`SORTED BINARY ARRAY: ${log}`, showOutputs);
+    testOutPut.numbers = sortedBinaryArray;
+
+    return testOutPut;
   }
 
   let displayOptions = {
     showInputs: true,
-    showOutputs: true
+    showOutputs: true,
   }
 
-  linearSolution(testInput);
-  testASolution(linearSolution, testInput, displayOptions);
+  globals.testSolution(sortBinaryArrayInLinearTime, testInput, displayOptions);
 
 })();

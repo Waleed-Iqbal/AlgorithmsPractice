@@ -6,7 +6,6 @@
 
 (() => {
 
-  let testASolution = globals.testASolution;
   let showLog = globals.showLog;
 
   let testData = {
@@ -30,6 +29,6 @@
     showOutputs: false
   }
 
-  testASolution(doesSubArrayWithZeroSumExist, testData, displayOptions);
+  globals.testSolution(doesSubArrayWithZeroSumExist, testData, displayOptions);
 
 })();

@@ -1,3 +1,26 @@
 An attempt to implement all of the algorithms mention in following Quora's page in JavaScript
 
 https://www.quora.com/q/kqxqbzywcunzbyyp/500-Data-Structures-and-Algorithms-interview-questions-and-their-solutions
+
+
+
+All the test inputs need to be an object. Where key is the name of the input and value is the input itself.
+The same goes for output as well.
+
+let testInput = {
+  numbers: [0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1]
+}
+
+
+The function containing the algorithm will expect an argument of input while output will be an object as described above.
+
+
+The input object will be defined in the algorithm file.
+
+
+use the global function "testSolution" to test your solution. First argument is the function, second argument is test input object and
+third argument is the displaying option object which is like following
+let displayOptions = {
+  showInputs: true,
+  showOutputs: true,
+}

@@ -7,7 +7,6 @@
 (() => {
 
   let showLog = globals.showLog;
-  let testASolution = globals.testASolution;
 
 
   let testData = {
@@ -102,8 +101,9 @@
     showOutputs: false
   }
 
-  testASolution(bruteForceSolution, testData, { showInputs: false, showOutputs: displayOptions.showOutputs }); // O(n^2)
-  testASolution(betterSolution, testData, displayOptions); // O(nlog(n))
-  testASolution(muchBetterSolution, testData, displayOptions); // O(n)
+  let testSolution = globals.testSolution;
+  testSolution(bruteForceSolution, testData, displayOptions); // O(n^2)
+  testSolution(betterSolution, testData, displayOptions); // O(nlog(n))
+  testSolution(muchBetterSolution, testData, displayOptions); // O(n)
 
 })();

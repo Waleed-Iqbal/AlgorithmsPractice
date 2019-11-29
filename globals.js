@@ -18,12 +18,11 @@
     endTime: null,
     totalTime() {
       let timeElapsed = parseFloat(this.endTime - this.startTime).toFixed(5);
-      console.log(`Time elapsed: ${timeElapsed}`);
+      console.log(`\nTime elapsed: ${timeElapsed}\n`);
     }
   }
 
   /**
-   *
    * @param {array} count upper limit of numbers starting from zero
    */
   let getRandomNumbers = (count) => {
@@ -39,7 +38,6 @@
 
 
   /**
-   *
    * @param {string} log the message to show
    * @param {boolean} displayLog display message or not
    */
@@ -48,7 +46,7 @@
   }
 
 
-  let displayAllInputs = (testData) => {
+  let displayAllData = (testData) => {
     var allTestData = Object.entries(testData);
 
     let input = "";
@@ -56,7 +54,7 @@
       let inputName = value[0]; // first index is always name
       let inputValue = value[1]; // second index is always the value
 
-      input += `${inputName.toUpperCase()}:\n`;
+      input += `\n${inputName.toUpperCase()}:\n`;
 
       if (inputValue.constructor === Array) {
         inputValue.map(val => {
@@ -68,12 +66,9 @@
       else if (inputValue.constructor === Object) {
         input += JSON.stringify(inputValue);
       }
-
-      input += `\n`;
     });
 
-    console.log(input);
-
+    console.log(`${input}`);
   }
 
 
@@ -81,22 +76,35 @@
  * @param {callback} solution Name of the function to test
  * @param {displayOptions} displayOptions to display inputs and outputs
  */
-  let testASolution = (callback, testData, displayOptions) => {
+  let testSolution = (callback, testData, displayOptions) => {
+
+    displayOptions = displayOptions || defaultDisplayOptions;
 
     if (displayOptions.showInputs) {
-      displayAllInputs(testData);
+      showLog("\nINPUTS ...");
+      displayAllData(testData);
     }
 
     timeCalculations.start();
-    callback(displayOptions.showOutputs);
+    let output = callback();
     timeCalculations.end();
     timeCalculations.totalTime();
+
+    if (displayOptions.showOutputs) {
+      showLog("\nOUTPUTS ...");
+      displayAllData(output);
+    }
   }
 
 
+  let defaultDisplayOptions = {
+    showInputs: true,
+    showOutputs: true
+  }
+
   return globals = {
     showLog: showLog,
-    testASolution: testASolution,
+    testSolution: testSolution,
     getRandomNumbers: getRandomNumbers
   };
 

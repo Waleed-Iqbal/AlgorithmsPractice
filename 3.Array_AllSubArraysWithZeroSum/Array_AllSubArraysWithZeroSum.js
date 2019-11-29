@@ -7,8 +7,6 @@
 (() => {
 
   let showLog = globals.showLog;
-  let testASolution = globals.testASolution;
-
 
   let testInput1 = {
    numbers: [3, 4, -7, 3, 1, 3, 1, -4, -2, -2]
@@ -54,6 +52,6 @@
     showOutputs: true
   }
 
-  testASolution(bruteForceSolution, testInput1, { showInputs: true, showOutputs: displayOptions.showOutputs }); // O(n^2)
+  globals.testSolution(bruteForceSolution, testInput1, displayOptions); // O(n^2)
 
 })();
