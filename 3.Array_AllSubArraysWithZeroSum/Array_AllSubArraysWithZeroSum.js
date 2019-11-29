@@ -6,8 +6,6 @@
 
 (() => {
 
-  let showLog = globals.showLog;
-
   let testInput1 = {
    numbers: [3, 4, -7, 3, 1, 3, 1, -4, -2, -2]
   };
@@ -32,19 +30,26 @@
     let sum = 0;
     let subArray = "";
     let totalNumbers = testInput1.numbers.length;
+    let testOutPut = {
+      subarray1: []
+    }
 
     testInput1.numbers.map((number, index, numbers) => {
       sum = 0;
       subArray = "";
+      totalSubArraysFound = 0;
 
       for (let i = index; i < totalNumbers; i++) {
         sum += numbers[i];
         subArray += numbers[i] + ", ";
 
-        if (sum === 0)
-          showLog(`ZERO SUM SUBARRAY: ${subArray}`, showOutputs);
+        if (sum === 0) {
+          ++totalSubArraysFound;
+          testOutPut[`subArray_${totalSubArraysFound}`] = subArray;
+        }
       }
     });
+    return testOutPut;
   }
 
   let displayOptions = {
