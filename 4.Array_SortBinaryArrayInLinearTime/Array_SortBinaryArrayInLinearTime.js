@@ -10,11 +10,35 @@
   let testASolution = globals.testASolution;
 
 
-  let testInput1 = {
-  //  numbers: [3, 4, -7, 3, 1, 3, 1, -4, -2, -2]
-  };
+  // let testInput1 = {
+  //   numbers: [0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1]
+  // };
 
-  let bruteForceSolution = () => {
+  let testInput1 = [0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1];
+
+  let bruteForceSolution = (input) => {
+    // if 0 is found, prepend it to new array, for 1, append it to array
+
+    let log = `Input:\n`;
+    let sortedBirnayrArray = [];
+    input.map(value => {
+      log += `${value}, `;
+
+      if (value == 1)
+        sortedBirnayrArray.push(value);
+      else
+        sortedBirnayrArray.unshift(value);
+    });
+
+    log += `\nOutput:\n`;
+
+    sortedBirnayrArray.map(value => {
+      log += `${value}, `;
+    })
+
+
+    console.log(log);
+    return sortedBirnayrArray;
 
   }
 
@@ -23,6 +47,7 @@
     showOutputs: true
   }
 
-  testASolution(bruteForceSolution, testInput1, { showInputs: true, showOutputs: displayOptions.showOutputs }); // O(n^2)
+  bruteForceSolution(testInput1);
+  //testASolution(bruteForceSolution, testInput1);
 
 })();
