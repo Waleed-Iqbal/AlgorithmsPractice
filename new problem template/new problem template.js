@@ -29,6 +29,6 @@ Output: ---
     showOutputs: true
   }
 
-  globals.testASolution(solutionFunction, testInput, displayOptions);
+  globals.testSolution(solutionFunction, testInput, displayOptions);
 
 })();
