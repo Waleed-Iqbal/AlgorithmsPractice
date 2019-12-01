@@ -21,6 +21,7 @@ Output: ---
    }
 
   let solutionFunction = (input) => {
+    input = input || testInput.numbers;
 
   }
 
