@@ -23,6 +23,11 @@ Output: ---
   let solutionFunction = (input) => {
     input = input || testInput.numbers;
 
+
+    let output = {
+    };
+
+    return output;
   }
 
   let displayOptions = {
