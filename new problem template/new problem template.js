@@ -1,20 +1,23 @@
-
-
 // taken from
-// https://www.techiedelight.com/check-subarray-with-0-sum-exists-not/
+// link_here
 
 
 (() => {
 
-  let showLog = globals.showLog;
-  let testASolution = globals.testASolution;
 
+  let testInput = {
+    numbers: [0, 1, 0, 0, 1, 1, 1, 0, 1, 0, 1]
+   }
+
+  let solutionFunction = () => {
+
+  }
 
   let displayOptions = {
     showInputs: false,
     showOutputs: true
   }
 
-  testASolution(fun_name, test_input, { showInputs: true, showOutputs: displayOptions.showOutputs });
+  globals.testASolution(solutionFunction, testInput, displayOptions);
 
 })();
