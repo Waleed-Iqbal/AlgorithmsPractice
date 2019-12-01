@@ -1,6 +1,17 @@
-// taken from
-// link_here
 
+/*
+taken from
+link_here
+
+Example 1
+Input: ---
+Output: ---
+
+Example 2
+Input: ---
+Output: ---
+
+ */
 
 (() => {
 
