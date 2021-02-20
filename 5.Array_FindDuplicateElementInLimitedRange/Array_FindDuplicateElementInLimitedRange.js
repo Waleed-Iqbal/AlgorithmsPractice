@@ -5,6 +5,9 @@ taken from
 https://www.techiedelight.com/find-duplicate-element-limited-range-array/
 
 
+Given a limited range array of size 'n' and containing elements between 1 and n-1
+with one element repeating, find the duplicate number in it without using any extra space.
+
  Example 1
  Input: [1,2,3,3,4]
  Output: 3
@@ -45,7 +48,7 @@ https://www.techiedelight.com/find-duplicate-element-limited-range-array/
 
 
   let displayOptions = {
-    showInputs: false,
+    showInputs: true,
     showOutputs: true
   }
 
