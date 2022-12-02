@@ -2,7 +2,8 @@ An attempt to implement all of the algorithms mention in following Quora's page 
 
 https://www.quora.com/q/kqxqbzywcunzbyyp/500-Data-Structures-and-Algorithms-interview-questions-and-their-solutions
 
-
+Its not here
+https://medium.com/techie-delight/500-data-structures-and-algorithms-practice-problems-35afe8a1e222
 
 All the test inputs need to be an object. Where key is the name of the input and value is the input itself.
 The same goes for output as well.
