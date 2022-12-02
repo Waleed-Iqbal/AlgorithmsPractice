@@ -1,4 +1,4 @@
-(function(){
+(function () {
 
   const input = `A X
   A X
@@ -2501,11 +2501,7 @@
   A X
   A X`;
 
-  // const game_params = {
-  //   rock, paper, scissors
-  // }
-
-  const guide = {
+  let guide = {
     'A': 'rock',
     'X': 'rock',
     'B': 'paper',
@@ -2515,8 +2511,8 @@
   }
 
   const scores = {
-    'rock': 1, 
-    'paper': 2, 
+    'rock': 1,
+    'paper': 2,
     'scissors': 3,
   }
 
@@ -2524,20 +2520,20 @@
   let score = 0;
 
   formatted_input.forEach(game => {
-    game = game.replaceAll('  ','');
+    game = game.replaceAll('  ', '');
 
     const player_1 = game[0];
     const player_2 = game[2];
 
     const is_winner = (guide[player_1] == 'rock' && guide[player_2] == 'paper') ||
-    (guide[player_1] == 'paper' && guide[player_2] == 'scissors') ||
-    (guide[player_1] == 'scissors' && guide[player_2] == 'rock');
+      (guide[player_1] == 'paper' && guide[player_2] == 'scissors') ||
+      (guide[player_1] == 'scissors' && guide[player_2] == 'rock');
 
     const is_draw = (guide[player_1] == guide[player_2]) ||
-    (guide[player_1] == guide[player_2] ||
-    (guide[player_1] === guide[player_2]));
+      (guide[player_1] == guide[player_2] ||
+        (guide[player_1] === guide[player_2]));
 
-    if(is_winner) {
+    if (is_winner) {
       score += scores[guide[player_2]] + 6;
     } else if (is_draw) {
       score += scores[guide[player_2]] + 3;
@@ -2547,5 +2543,38 @@
   });
 
 
-  console.log({score});
+  // part - 2
+
+  outcome_guide = {
+    'X': 'lose',
+    'Y': 'draw',
+    'Z': 'win',
+  }
+
+  score = 0;
+
+  formatted_input.forEach(game => {
+    game = game.replaceAll('  ', '');
+
+    const player_1 = game[0];
+    const is_outcome_win = outcome_guide[game[2]] == 'win';
+    const is_outcome_lose = outcome_guide[game[2]] == 'lose';
+
+    if (is_outcome_win) {
+      if (guide[player_1] == 'rock') score += scores['paper'] + 6;
+      else if (guide[player_1] == 'paper') score += scores['scissors'] + 6;
+      else score += scores['rock'] + 6;
+    } else if (is_outcome_lose) {
+      if (guide[player_1] == 'rock') score += scores['scissors'];
+      else if (guide[player_1] == 'paper') score += scores['rock'];
+      else score += scores['paper'];
+    } else {
+      score += scores[guide[player_1]] + 3;
+    }
+  });
+
+
+  console.log({
+    score
+  });
 }())
