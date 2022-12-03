@@ -303,7 +303,7 @@
 
   const formatted_input = input.replace(/  /g, '').split('\n');
 
-  const commonItems = formatted_input.map(item => {
+  let commonItems = formatted_input.map(item => {
     const itemLength = item.length / 2;
     const firstHalf = item.slice(0, itemLength);
     const secondHalf = item.slice(itemLength);
@@ -315,14 +315,37 @@
     }
   });
 
-  const totalPriority = commonItems.reduce((prev, curr) => {
-    const isLowerCase = curr == curr.toLowerCase();
-    let currentPriority = prev + curr.charCodeAt(0);
+  let totalPriority = calculatePriority(commonItems);
 
-    currentPriority = isLowerCase ? currentPriority - 96 : currentPriority - 64 + 26;
+  // part 2
+  commonItems = []
+  for (let i = 0; i < formatted_input.length; i = i + 3) {
+    const group = [formatted_input[i], formatted_input[i + 1], formatted_input[i + 2]];
 
-    return currentPriority;
-  }, 0);
+    for (let j = 0; j < group[0].length; j++) {
+      const currentChar = group[0][j];
+      if (group[1].indexOf(currentChar) > -1 && group[2].indexOf(currentChar) > -1) {
+        commonItems.push(currentChar);
+        isItemFound = true;
+        break;
+      }
+    }
+  }
+
+  totalPriority = calculatePriority(commonItems);
+
+  function calculatePriority(items) {
+    const totalPriority = items.reduce((prev, curr) => {
+      const isLowerCase = curr == curr.toLowerCase();
+      let currentPriority = prev + curr.charCodeAt(0);
+  
+      currentPriority = isLowerCase ? currentPriority - 96 : currentPriority - 64 + 26;
+  
+      return currentPriority;
+    }, 0);
+
+    return totalPriority;
+  }
 
   console.log(totalPriority)
 }())
