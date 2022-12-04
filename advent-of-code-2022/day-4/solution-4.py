@@ -1003,6 +1003,7 @@ input = """71-97,71-72
 
 formatted_output = input.split('\n')
 count_fully_contained = 0
+count_contained = 0
 
 for i, pairs in enumerate(formatted_output):
   pair_one = pairs.split(',')[0].split('-')
@@ -1016,14 +1017,15 @@ for i, pairs in enumerate(formatted_output):
   is_fully_contained = \
     (one_start >= two_start and one_end <= two_end) or \
     (one_start <= two_start and one_end >= two_end)
-
   if is_fully_contained: count_fully_contained += 1
 
-  print(f"---- {i} ----")
-  print(f"pair_one: {pair_one}")
-  print(f"pair_two: {pair_two}")
-  print(f"is_fully_contained: {is_fully_contained}")
+  # Part 2
+  is_not_contained = \
+    (one_start < two_start and one_end < two_start) or \
+    (one_start > two_end and one_end > two_end)
+  if not is_not_contained: count_contained += 1
+
+
 
 print(f"count_fully_contained: {count_fully_contained}")
-
-
+print(f"count_contained: {count_contained}")
