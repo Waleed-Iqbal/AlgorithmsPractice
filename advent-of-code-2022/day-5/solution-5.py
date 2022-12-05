@@ -511,7 +511,7 @@ move 4 from 9 to 8
 move 2 from 8 to 7
 move 4 from 6 to 4
 move 10 from 6 to 1
-"""
+"""  
 
 formatted_input = input.split('\n')
 formatted_input.pop(0) # remove empty line
@@ -535,11 +535,6 @@ for i in range(crates_start, crates_end):
     if j%4 == 0 and single_line[j] == '[':
       crates[int(j/4)].insert(0, single_line[j+1])
 
-# crates_count = len(formatted_input[crates_count_index].split('   '))
-
-print(crates)
-print(f'crates_end: {crates_end}')
-print("==========")
 number_of_calls = 0
 for i in range (crates_end + 2, len(formatted_input) - 1):
   split_input = formatted_input[i].split(' ')
@@ -548,15 +543,40 @@ for i in range (crates_end + 2, len(formatted_input) - 1):
   source = int(split_input[3]) - 1
   destination = int(split_input[5]) - 1
 
-  instruction = f"move {num_of_crates} from {source} to {destination}"
   for j in range(0, num_of_crates):
     crates[destination].append(crates[source].pop())
-
-print(crates)
-print(number_of_calls)
 
 top_crates = []
 for crate in crates.values():
   top_crates.append(crate[-1])
 
+# Part 2
+crates = {}
+for i in range(crates_start, crates_end + 1):
+  crates[i] = []
+for i in range(crates_start, crates_end):
+  single_line = formatted_input[i]
+  for j in range(0,len(single_line)):
+    if j%4 == 0 and single_line[j] == '[':
+      crates[int(j/4)].insert(0, single_line[j+1])
+print(crates)
+print("==========")
+
+top_crates = []
+
+for i in range (crates_end + 2, len(formatted_input) - 1):
+  split_input = formatted_input[i].split(' ')
+
+  num_of_crates = int(split_input[1])
+  source = int(split_input[3]) - 1
+  destination = int(split_input[5]) - 1
+
+  temp = []
+  for j in range(0, num_of_crates):
+    temp.insert(0, crates[source].pop())
+  crates[destination] = crates[destination] + temp
+
+top_crates = []
+for crate in crates.values():
+  top_crates.append(crate[-1])
 print(''.join(top_crates))
