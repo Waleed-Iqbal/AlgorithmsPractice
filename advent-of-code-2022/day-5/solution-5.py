@@ -511,7 +511,19 @@ move 4 from 9 to 8
 move 2 from 8 to 7
 move 4 from 6 to 4
 move 10 from 6 to 1
-"""  
+"""
+
+def get_crates_data_structure(data, start, end):
+  crates = {}
+  for i in range(start, end + 1):
+    crates[i] = []
+
+  for i in range(start, end):
+    single_line = data[i]
+    for j in range(0,len(single_line)):
+      if j%4 == 0 and single_line[j] == '[':
+        crates[int(j/4)].insert(0, single_line[j+1])
+  return crates
 
 formatted_input = input.split('\n')
 formatted_input.pop(0) # remove empty line
@@ -526,14 +538,7 @@ for i, formatted_str in enumerate(formatted_input):
     crates_end = i
     break
 
-for i in range(crates_start, crates_end + 1):
-  crates[i] = []
-
-for i in range(crates_start, crates_end):
-  single_line = formatted_input[i]
-  for j in range(0,len(single_line)):
-    if j%4 == 0 and single_line[j] == '[':
-      crates[int(j/4)].insert(0, single_line[j+1])
+crates = get_crates_data_structure(formatted_input, crates_start, crates_end)
 
 number_of_calls = 0
 for i in range (crates_end + 2, len(formatted_input) - 1):
@@ -551,14 +556,7 @@ for crate in crates.values():
   top_crates.append(crate[-1])
 
 # Part 2
-crates = {}
-for i in range(crates_start, crates_end + 1):
-  crates[i] = []
-for i in range(crates_start, crates_end):
-  single_line = formatted_input[i]
-  for j in range(0,len(single_line)):
-    if j%4 == 0 and single_line[j] == '[':
-      crates[int(j/4)].insert(0, single_line[j+1])
+crates = get_crates_data_structure(formatted_input, crates_start, crates_end)
 print(crates)
 print("==========")
 
