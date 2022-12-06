@@ -6,13 +6,13 @@ input = """hjchjcjhjshjsssrfsrrldrddbrrzfzjzzrffvwwclwlffhwhwpwfffcbctbccchmccfm
 marker_length = 4
 
 for i in range(marker_length, len(input)):
-  four_markers = input[i-marker_length : i]
+  markers = input[i-marker_length : i]
   is_found = True
-  for ch in four_markers:
-    if four_markers.count(ch) > 1:
+  for ch in markers:
+    if markers.count(ch) > 1:
       is_found = False
 
   if is_found:
     print(f'FOUND AT INDEX: {i}')
-    print(f'four_markers: {four_markers}')
+    print(f'markers: {markers}')
     break
