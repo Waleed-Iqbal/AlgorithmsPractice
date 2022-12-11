@@ -5,12 +5,6 @@ pprint = pprint.pprint
 
 formatted_input = open(Path(__file__).with_name("input.txt").absolute(), "r").read().split('\n')
 
-class Directory:
-  def __init__(self, name, parent, files, directories):
-    self.name = name
-    self.files = files
-    self.directories = directories
-
 
 graph = {}
 current_directory = {}
@@ -24,6 +18,24 @@ def update_current_directory(current_directory):
     else:
       current_directory = current_directory[dir_name]
   return current_directory
+
+def find_all_directories_sizes(directory):
+  directories_sizes.append(int(directory['size']))
+  current_directories = directory['directories']
+
+  if len(current_directories) > 0:
+    for folder in current_directories:
+      find_all_directories_sizes(current_directories[folder])
+
+def find_required_directories(directory):
+  if directory['size'] <= 100000:
+    directories_with_required_size.append(directory)
+  
+  current_directories = directory['directories']
+
+  if len(current_directories) > 0:
+    for folder in current_directories:
+      find_required_directories(current_directories[folder])
 
 for index, instruction in enumerate(formatted_input):
   instruction = instruction.split(' ')
@@ -55,16 +67,6 @@ for index, instruction in enumerate(formatted_input):
     else:
       current_directory['files'][instruction[1]] = instruction[0] 
       current_directory['size'] += int(instruction[0])
-    
-
-def find_required_directories(directory):
-  if directory['size'] <= 100000:
-    directories_with_required_size.append(directory)
-  
-  if len(directory['directories']) > 0:
-    for folder in directory['directories']:
-      find_required_directories(directory['directories'][folder])
-    return
 
 find_required_directories(graph['/'])
 
@@ -72,6 +74,7 @@ total_freed_size = 0
 for item in directories_with_required_size:
   total_freed_size += int(item['size'])
 
+print(total_freed_size)
 # answer - 1667443 (correct)
 
 
@@ -83,12 +86,7 @@ unused_space = available_space - total_current_size
 unused_space_required = required_free_space - unused_space
 
 directories_sizes = []
-def find_all_directories_sizes(directory):
-  directories_sizes.append(int(directory['size']))
 
-  if len(directory['directories']) > 0:
-    for folder in directory['directories']:
-      find_all_directories_sizes(directory['directories'][folder])
 
 find_all_directories_sizes(graph['/'])
 
@@ -96,6 +94,7 @@ sizes_that_free_up_space = []
 for size in directories_sizes:
   if size >= unused_space_required:
     sizes_that_free_up_space.append(size)
+
 sizes_that_free_up_space.sort()
 print(sizes_that_free_up_space[0])
 
