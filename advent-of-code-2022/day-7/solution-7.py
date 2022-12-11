@@ -24,50 +24,64 @@ class Graph:
     self.is_dir = is_dir
 
 
-def get_directory(name, directory): 
-  return {'name': name, 'current_directory': directory}
+def get_directory(name, size): 
+  return {'name': name, 'size': size}
 
 graph = {}
 formatted_input = input.split('\n')
-current_directory = { 'name': '', 'parent': '' }
+# current_directory = { 'name': '', 'size': 0 }
+current_directory = {}
+current_directory_path = []
+previous_directory_size = 0
 
 for index, instruction in enumerate(formatted_input):
+  if index > 23: break
   instruction = instruction.split(' ')
 
   if instruction[1] == 'ls': continue
-  if instruction[1] == '..': continue
 
-  is_cd = instruction[1] == 'cd'
+  current_directory = graph
 
-  if is_cd:
+  for dir_name in current_directory_path:
+    current_directory = current_directory[dir_name]
+
+  if instruction[1] == 'cd':
     name = instruction[2]
-    if name == '/':
-      current_directory = get_directory(name, '')
-    else:
-      current_directory =  get_directory(name, current_directory['name'])
+    if name is '/':
+      graph[name]= { 'directories': {}, 'files': {}, 'size': 0 }
+      current_directory_path.append(name)
+      continue
 
-    graph[name] = {
-      'name': name,
-      'directories': {},
-      'files': {},
-      'size': 0
-    }
-  else:
-    name = instruction[1]
-    directory = graph[current_directory['name']]
+    
+    if name is not '..':
+      current_directory_path.append(name)
+      current_directory[name] = { 'directories': {}, 'files': {}, 'size': 0 }
+  else: # output
     if instruction[0] == 'dir':
-      directory['directories'][name] = {
-        'name': name,
+      current_directory['directories'][instruction[1]] = {
         'directories': {},
         'files': {},
         'size': 0
       }
     else:
-      directory['files'][name] = {
-        'name' : name,
-        'size': int(instruction[0])
-      }
-      directory['size'] += int(instruction[0])
+      current_directory['files'][instruction[1]] = instruction[0] 
+    
+  # else:
+  #   name = instruction[1]
+  #   directory = graph[current_directory['name']]
+  #   if instruction[0] == 'dir':
+  #     directory['directories'][name] = {
+  #       'name': name,
+  #       'directories': {},
+  #       'files': {},
+  #       'size': 0
+  #     }
+  #   else:
+  #     directory['files'][name] = {
+  #       'name' : name,
+  #       'size': int(instruction[0])
+  #     }
+  #     directory['size'] += int(instruction[0])
 
 
 pprint(graph)
