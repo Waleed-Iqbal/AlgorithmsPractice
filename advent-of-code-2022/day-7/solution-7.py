@@ -13,14 +13,9 @@ class Directory:
 
 
 graph = {}
-# formatted_input = input.split('\n')
 current_directory = {}
 current_directory_path = []
-previous_directory_size = 0
 directories_with_required_size = []
-
-def get_directory(name, size): 
-  return {'name': name, 'size': size}
 
 def update_current_directory(current_directory):
   for dir_name in current_directory_path:
@@ -77,10 +72,7 @@ total_freed_size = 0
 for item in directories_with_required_size:
   total_freed_size += int(item['size'])
 
-# print(total_freed_size)
-# first guess - 1030948
-# second guess - 1149061
-# third guess - 1667443 (correct)
+# answer - 1667443 (correct)
 
 
 # part 2
