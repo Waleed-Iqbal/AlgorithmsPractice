@@ -3,29 +3,17 @@ from pathlib import Path
 
 pprint = pprint.pprint
 
-input = open(Path(__file__).with_name("input.txt").absolute(), "r").read()
+formatted_input = open(Path(__file__).with_name("input.txt").absolute(), "r").read().split('\n')
 
 class Directory:
   def __init__(self, name, parent, files, directories):
     self.name = name
     self.files = files
-    self.parent = parent
     self.directories = directories
-
-class File:
-  def __init__(self, name, size, parent):
-    self.name = name
-    self.size = size
-    self.parent = parent
-
-class Graph:
-  def __init__(self, nodes):
-    self.name = name
-    self.is_dir = is_dir
 
 
 graph = {}
-formatted_input = input.split('\n')
+# formatted_input = input.split('\n')
 current_directory = {}
 current_directory_path = []
 previous_directory_size = 0
@@ -85,14 +73,39 @@ def find_required_directories(directory):
 
 find_required_directories(graph['/'])
 
-total_size = 0
+total_freed_size = 0
 for item in directories_with_required_size:
-  total_size += int(item['size'])
-  print(item)
+  total_freed_size += int(item['size'])
 
-print(total_size)
-
-
+# print(total_freed_size)
 # first guess - 1030948
 # second guess - 1149061
 # third guess - 1667443 (correct)
+
+
+# part 2
+available_space = 70000000
+required_free_space = 30000000
+total_current_size = int(graph['/']['size'])
+unused_space = available_space - total_current_size
+unused_space_required = required_free_space - unused_space
+
+directories_sizes = []
+def find_all_directories_sizes(directory):
+  directories_sizes.append(int(directory['size']))
+
+  if len(directory['directories']) > 0:
+    for folder in directory['directories']:
+      find_all_directories_sizes(directory['directories'][folder])
+
+find_all_directories_sizes(graph['/'])
+
+sizes_that_free_up_space = []
+for size in directories_sizes:
+  if size >= unused_space_required:
+    sizes_that_free_up_space.append(size)
+sizes_that_free_up_space.sort()
+print(sizes_that_free_up_space[0])
+
+# answer - 8998590
+
