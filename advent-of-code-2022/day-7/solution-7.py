@@ -5,7 +5,6 @@ pprint = pprint.pprint
 
 formatted_input = open(Path(__file__).with_name("input.txt").absolute(), "r").read().split('\n')
 
-
 graph = {}
 current_directory = {}
 current_directory_path = []
@@ -84,9 +83,7 @@ required_free_space = 30000000
 total_current_size = int(graph['/']['size'])
 unused_space = available_space - total_current_size
 unused_space_required = required_free_space - unused_space
-
 directories_sizes = []
-
 
 find_all_directories_sizes(graph['/'])
 
@@ -99,4 +96,3 @@ sizes_that_free_up_space.sort()
 print(sizes_that_free_up_space[0])
 
 # answer - 8998590
-
