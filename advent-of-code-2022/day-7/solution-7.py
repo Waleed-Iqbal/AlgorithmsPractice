@@ -52,11 +52,11 @@ for index, instruction in enumerate(formatted_input):
   if instruction[1] == 'ls': continue
 
   current_directory = graph
-
   current_directory = update_current_directory(current_directory)
 
   if instruction[1] == 'cd':
     name = instruction[2]
+
     if name is '/':
       graph[name]= { 'directories': {}, 'files': {}, 'size': 0 }
       current_directory_path.append(name)
@@ -69,11 +69,7 @@ for index, instruction in enumerate(formatted_input):
       current_directory_path.pop()
   else: # output
     if instruction[0] == 'dir':
-      current_directory['directories'][instruction[1]] = {
-        'directories': {},
-        'files': {},
-        'size': 0
-      }
+      current_directory['directories'][instruction[1]] = { 'directories': {}, 'files': {}, 'size': 0 }
     else:
       current_directory['files'][instruction[1]] = instruction[0] 
     
@@ -82,18 +78,6 @@ pprint(graph)
 
 directories_with_required_size = []
 total_size = 0
-
-for name in graph.keys():
-  if graph[name]['size'] <= 100000:
-    directories_with_required_size.append({
-      'name':name,
-      'size': graph[name]['size']
-    })
-    total_size += graph[name]['size']
-
-
-pprint(directories_with_required_size)
-pprint(total_size)
 
 
 # first guess - 1030948
