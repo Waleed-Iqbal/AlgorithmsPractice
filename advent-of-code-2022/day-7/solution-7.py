@@ -24,29 +24,25 @@ class Graph:
     self.is_dir = is_dir
 
 
-
-
 graph = {}
 formatted_input = input.split('\n')
-# current_directory = { 'name': '', 'size': 0 }
 current_directory = {}
 current_directory_path = []
 previous_directory_size = 0
-
+directories_with_required_size = []
 
 def get_directory(name, size): 
   return {'name': name, 'size': size}
 
 def update_current_directory(current_directory):
   for dir_name in current_directory_path:
-    if dir_name is not '/':
+    if dir_name != '/':
       current_directory = current_directory['directories'][dir_name]
     else:
       current_directory = current_directory[dir_name]
   return current_directory
 
 for index, instruction in enumerate(formatted_input):
-  # if index > 23: break
   instruction = instruction.split(' ')
 
   if instruction[1] == 'ls': continue
@@ -57,7 +53,7 @@ for index, instruction in enumerate(formatted_input):
   if instruction[1] == 'cd':
     name = instruction[2]
 
-    if name is '/':
+    if name == '/':
       graph[name]= { 'directories': {}, 'files': {}, 'size': 0 }
       current_directory_path.append(name)
       continue
@@ -78,13 +74,28 @@ for index, instruction in enumerate(formatted_input):
       current_directory['size'] += int(instruction[0])
     
 
-pprint(graph)
+def find_required_directories(directory):
+  if directory['size'] <= 100000:
+    directories_with_required_size.append(directory)
+  
+  if len(directory['directories']) > 0:
+    for folder in directory['directories']:
+      find_required_directories(directory['directories'][folder])
+    return
 
-directories_with_required_size = []
+find_required_directories(graph['/'])
+
 total_size = 0
+for item in directories_with_required_size:
+  total_size += int(item['size'])
+  print(item)
+
+print(total_size)
 
 
 # first guess - 1030948
+# second guess - 1149061
+# third guess - 1667443 (correct)
 
 # {
 #   name: '/',
