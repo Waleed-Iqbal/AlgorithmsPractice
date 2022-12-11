@@ -66,12 +66,16 @@ for index, instruction in enumerate(formatted_input):
       current_directory_path.append(name)
       current_directory = current_directory['directories'][name]
     else:
+      current_directory_size = current_directory['size']
       current_directory_path.pop()
+      current_directory = update_current_directory(graph)
+      current_directory['size'] += current_directory_size
   else: # output
     if instruction[0] == 'dir':
       current_directory['directories'][instruction[1]] = { 'directories': {}, 'files': {}, 'size': 0 }
     else:
       current_directory['files'][instruction[1]] = instruction[0] 
+      current_directory['size'] += int(instruction[0])
     
 
 pprint(graph)
