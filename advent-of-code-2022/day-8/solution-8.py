@@ -72,39 +72,41 @@ for i in range(0, total_length):
   for j in range(0, len(row)):
     current_tree = row[j]
 
-    distance_top = 1
-    distance_right = 1
-    distance_bottom = 1
-    distance_left = 1
+    distance_top = 0
+    distance_left = 0
+    distance_right = 0
+    distance_bottom = 0
 
     # towards top edge
     for top in range(i - 1, -1, -1):
-      if current_tree == grid[top][j]: break
       if current_tree > grid[top][j]: distance_top += 1
+      elif current_tree <= grid[top][j]:
+        distance_top += 1
+        break
 
     # towards right edge
     for right in range(j + 1, len(row)):
-      if current_tree == grid[i][right]: break
       if current_tree > grid[i][right]: distance_right += 1
+      elif current_tree <= grid[i][right]:
+        distance_right += 1
+        break
 
     # towards bottom edge
     for bottom in range(i + 1, total_length):
-      if current_tree == grid[bottom][j]: break
       if current_tree > grid[bottom][j]: distance_bottom += 1
+      elif current_tree <= grid[bottom][j]:
+        distance_bottom += 1
+        break
 
     # towards left edge
     for left in range(j - 1, -1, -1):
-      if current_tree == grid[i][left]: break
       if current_tree > grid[i][left]: distance_left += 1
+      elif current_tree <= grid[i][left]:
+        distance_left += 1
+        break
 
     scenic_distances.append(distance_top * distance_right * distance_bottom * distance_left)
 
-
 print(max(scenic_distances))
 
-"""
-Guesses
-
-56925 - too low
-562275 - too high
-"""
+# 504000 - correct
