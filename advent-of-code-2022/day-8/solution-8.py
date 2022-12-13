@@ -21,46 +21,42 @@ def checkForTreeVisibility():
   if is_tree_visible:
     total_visible_trees += 1
 
-
-
-for i in range(1, total_length):
+for i in range(1, total_length - 1):
   row = grid[i]
 
-  for j in range(1, len(row)):
+  for j in range(1, len(row) - 1):
     current_tree = row[j]
 
     # towards top edge
-    for top in range(i-1, -1, -1):
+    for top in range(i - 1, -1, -1):
       is_tree_visible = current_tree > grid[top][j]
-      if not is_tree_visible: break
+      if is_tree_visible is False: break
     if is_tree_visible:
-      total_visible_trees += 1
+      checkForTreeVisibility()
       continue
 
     # towards right edge
-    for right in range(j+1, len(row)):
+    for right in range(j + 1, len(row)):
       is_tree_visible = current_tree > grid[i][right]
-      if not is_tree_visible: break
+      if is_tree_visible is False: break
     if is_tree_visible:
-      total_visible_trees += 1
+      checkForTreeVisibility()
       continue
 
     # towards bottom edge
-    for bottom in range(i+1, total_length):
+    for bottom in range(i + 1, total_length):
       is_tree_visible = current_tree > grid[bottom][j]
-      if not is_tree_visible: break
+      if is_tree_visible is False: break
     if is_tree_visible:
-      total_visible_trees += 1
+      checkForTreeVisibility()
       continue
 
     # towards left edge
-    for left in range(j-1, -1, -1):
+    for left in range(j - 1, -1, -1):
       is_tree_visible = current_tree > grid[i][left]
-      if not is_tree_visible: break
+      if is_tree_visible is False: break
     if is_tree_visible:
-      total_visible_trees += 1
-
+      checkForTreeVisibility()
 
 total_visible_trees += (total_length * 4 ) - 4
-print(total_visible_trees )
-
+# 1708 is correct
