@@ -14,7 +14,7 @@ total_length = len(grid)
 is_tree_visible = False
 total_visible_trees = 0
 
-"""
+
 def checkForTreeVisibility():
   global total_visible_trees
   global is_tree_visible
@@ -61,7 +61,7 @@ for i in range(1, total_length - 1):
 
 total_visible_trees += (total_length * 4 ) - 4
 # 1708 is correct
-"""
+
 
 # part 2
 scenic_distances = []
