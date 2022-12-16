@@ -27,8 +27,9 @@ def isDiagonal(pos_h, pos_t):
 
 
 for step in formatted_input:
-  direction = step.split(' ')[0]
-  movement = int(step.split(' ')[1])
+  step_info = step.split(' ')
+  direction = step_info[0]
+  movement = int(step_info[1])
 
   is_up = direction == 'U'
   is_right = direction == 'R'
