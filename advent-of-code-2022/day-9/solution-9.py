@@ -89,8 +89,8 @@ Guesses
 
 # Part 2
 
-temp = [{'name': x, 'x': 0, 'y': 0} for x in range(1, 11)]
-head = 10
+temp = [{'name': x, 'x': 0, 'y': 0} for x in range(0, 10)]
+head = 0
 
 rope = {}
 for part in temp:
@@ -116,18 +116,19 @@ for step in formatted_input:
 
     for new_step in range(1, 10):
       pos_t = rope[new_step]
-      pos_h = rope[new_step + 1]
+      pos_h = rope[new_step - 1]
+
       distance = get_distance(pos_h, pos_t)
 
-      if get_distance(pos_h, pos_t) < 2: continue
+      if distance < 2: continue
 
       if isSameRow(pos_h, pos_t):
-        if is_right: pos_t['x'] += 1
-        elif is_left: pos_t['x'] -= 1
+        if pos_h['x'] > pos_t['x']: pos_t['x'] += 1
+        elif pos_h['x'] < pos_t['x']: pos_t['x'] -= 1
 
       elif isSameColumn(pos_h, pos_t):
-        if is_up: pos_t['y'] += 1
-        elif is_down: pos_t['y'] -= 1
+        if pos_h['y'] > pos_t['y']: pos_t['y'] += 1
+        elif pos_h['y'] < pos_t['y']: pos_t['y'] -= 1
 
       else:
         is_direction_up_right = pos_h['x'] > pos_t['x'] and pos_h['y'] > pos_t['y'] 
@@ -148,11 +149,7 @@ for step in formatted_input:
           pos_t['y'] -= 1
           pos_t['x'] -= 1
 
-  
-
-    tail_visit_positions[f'{rope[1]["x"]}--{rope[1]["y"]}'] = 'visited'
-  print(f"\n\n ----{step}---- \n")
-  print(rope)
+    tail_visit_positions[f'{rope[9]["x"]}--{rope[9]["y"]}'] = 'visited'
 print(len(tail_visit_positions.keys()))
 
 
@@ -160,4 +157,6 @@ print(len(tail_visit_positions.keys()))
 """
 Guesses
 1. 3178 - too high
+2. 1409 - too low
+3. 2678 - correct
 """
