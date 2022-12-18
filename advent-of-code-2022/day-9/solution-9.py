@@ -122,37 +122,35 @@ for step in formatted_input:
 
       if distance < 2: continue
 
+      is_direction_right = pos_h['x'] > pos_t['x']
+      is_direction_up = pos_h['y'] > pos_t['y']
+      is_direction_down = pos_h['y'] < pos_t['y']
+      is_direction_left = pos_h['x'] < pos_t['x']
+
       if isSameRow(pos_h, pos_t):
-        if pos_h['x'] > pos_t['x']: pos_t['x'] += 1
-        elif pos_h['x'] < pos_t['x']: pos_t['x'] -= 1
+        if is_direction_right: pos_t['x'] += 1
+        elif is_direction_left: pos_t['x'] -= 1
 
       elif isSameColumn(pos_h, pos_t):
-        if pos_h['y'] > pos_t['y']: pos_t['y'] += 1
-        elif pos_h['y'] < pos_t['y']: pos_t['y'] -= 1
+        if is_direction_up: pos_t['y'] += 1
+        elif is_direction_down: pos_t['y'] -= 1
 
       else:
-        is_direction_up_right = pos_h['x'] > pos_t['x'] and pos_h['y'] > pos_t['y'] 
-        is_direction_up_left = pos_h['x'] < pos_t['x'] and pos_h['y'] > pos_t['y'] 
-        is_direction_down_right = pos_h['x'] > pos_t['x'] and pos_h['y'] < pos_t['y'] 
-        is_direction_down_left = pos_h['x'] < pos_t['x'] and pos_h['y'] < pos_t['y']  
-
-        if is_direction_up_right:
+        if is_direction_right and is_direction_up:
           pos_t['y'] += 1
           pos_t['x'] += 1
-        elif is_direction_up_left:
+        elif is_direction_left and is_direction_up:
           pos_t['y'] += 1
           pos_t['x'] -= 1
-        elif is_direction_down_right:
+        elif is_direction_right and is_direction_down:
           pos_t['y'] -= 1
           pos_t['x'] += 1
-        elif is_direction_down_left:
+        elif is_direction_left and is_direction_down:
           pos_t['y'] -= 1
           pos_t['x'] -= 1
 
     tail_visit_positions[f'{rope[9]["x"]}--{rope[9]["y"]}'] = 'visited'
 print(len(tail_visit_positions.keys()))
-
-
 
 """
 Guesses
