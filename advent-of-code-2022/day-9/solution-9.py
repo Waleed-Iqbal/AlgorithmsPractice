@@ -30,55 +30,43 @@ for step in formatted_input:
   is_left = direction == 'L'
   is_right = direction == 'R'
 
-  print(f"---- NEXT STEP {step} ----")
-
   for step_distance in range(0, movement):
     if is_up: head_pos['y'] += 1
     elif is_down: head_pos['y'] -= 1
     elif is_left: head_pos['x'] -= 1
     elif is_right: head_pos['x'] += 1
 
-    distance = get_distance()
+    if get_distance() < 2: continue # don't need an else as that means not touching
 
-    if distance < 2: continue # don't need an else as that means not touching
-
-    result = ""
     if isSameRow():
-      result = 'same row : '
       if is_right: tail_pos['x'] += 1
       elif is_left: tail_pos['x'] -= 1
 
     elif isSameColumn():
-      result = 'same col : '
       if is_up: tail_pos['y'] += 1
       elif is_down: tail_pos['y'] -= 1
 
     else:
-      result = 'diagonal : '
-      is_up_right = head_pos['x'] > tail_pos['x'] and head_pos['y'] > tail_pos['y'] 
-      is_up_left = head_pos['x'] < tail_pos['x'] and head_pos['y'] > tail_pos['y'] 
-      is_down_right = head_pos['x'] > tail_pos['x'] and head_pos['y'] < tail_pos['y'] 
-      is_down_left = head_pos['x'] < tail_pos['x'] and head_pos['y'] < tail_pos['y'] 
+      is_direction_up_right = head_pos['x'] > tail_pos['x'] and head_pos['y'] > tail_pos['y'] 
+      is_direction_up_left = head_pos['x'] < tail_pos['x'] and head_pos['y'] > tail_pos['y'] 
+      is_direction_down_right = head_pos['x'] > tail_pos['x'] and head_pos['y'] < tail_pos['y'] 
+      is_direction_down_left = head_pos['x'] < tail_pos['x'] and head_pos['y'] < tail_pos['y'] 
 
-      if is_up_right:
+      if is_direction_up_right:
         tail_pos['y'] += 1
         tail_pos['x'] += 1
-      elif is_up_left:
+      elif is_direction_up_left:
         tail_pos['y'] += 1
         tail_pos['x'] -= 1
-      elif is_down_right:
+      elif is_direction_down_right:
         tail_pos['y'] -= 1
         tail_pos['x'] += 1
-      elif is_down_left:
+      elif is_direction_down_left:
         tail_pos['y'] -= 1
         tail_pos['x'] -= 1
-
-    print(f'{result} Distance: {distance} -- Head({head_pos["x"]}, {head_pos["y"]}) -- Tail({tail_pos["x"]}, {tail_pos["y"]})')
 
     tail_visit_pos[f'{tail_pos["x"]}--{tail_pos["y"]}'] = 'visited'
-  print('----------------------')
 
-# print(tail_visit_pos)
 print(len(tail_visit_pos.keys()))
 
 """
