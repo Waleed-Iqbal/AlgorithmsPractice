@@ -36,32 +36,32 @@ for step in formatted_input:
     elif is_left: head_pos['x'] -= 1
     elif is_right: head_pos['x'] += 1
 
-    if get_distance(head_pos, tail_pos) < 2: continue # don't need an else as that means not touching
+    if get_distance(head_pos, tail_pos) < 2: continue
+
+    is_direction_right = head_pos['x'] > tail_pos['x']
+    is_direction_up = head_pos['y'] > tail_pos['y']
+    is_direction_down = head_pos['y'] < tail_pos['y']
+    is_direction_left = head_pos['x'] < tail_pos['x']
 
     if isSameRow(head_pos, tail_pos):
-      if is_right: tail_pos['x'] += 1
-      elif is_left: tail_pos['x'] -= 1
+      if is_direction_right: tail_pos['x'] += 1
+      elif is_direction_left: tail_pos['x'] -= 1
 
     elif isSameColumn(head_pos, tail_pos):
-      if is_up: tail_pos['y'] += 1
-      elif is_down: tail_pos['y'] -= 1
+      if is_direction_up: tail_pos['y'] += 1
+      elif is_direction_down: tail_pos['y'] -= 1
 
     else:
-      is_direction_up_right = head_pos['x'] > tail_pos['x'] and head_pos['y'] > tail_pos['y'] 
-      is_direction_up_left = head_pos['x'] < tail_pos['x'] and head_pos['y'] > tail_pos['y'] 
-      is_direction_down_right = head_pos['x'] > tail_pos['x'] and head_pos['y'] < tail_pos['y'] 
-      is_direction_down_left = head_pos['x'] < tail_pos['x'] and head_pos['y'] < tail_pos['y'] 
-
-      if is_direction_up_right:
+      if is_direction_right and is_direction_up:
         tail_pos['y'] += 1
         tail_pos['x'] += 1
-      elif is_direction_up_left:
+      elif is_direction_left and is_direction_up:
         tail_pos['y'] += 1
         tail_pos['x'] -= 1
-      elif is_direction_down_right:
+      elif is_direction_right and is_direction_down:
         tail_pos['y'] -= 1
         tail_pos['x'] += 1
-      elif is_direction_down_left:
+      elif is_direction_left and is_direction_down:
         tail_pos['y'] -= 1
         tail_pos['x'] -= 1
 
