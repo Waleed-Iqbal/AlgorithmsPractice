@@ -41,9 +41,14 @@ for step in formatted_input:
   elif is_down: head_pos['y'] -= movement
   elif is_left: head_pos['x'] -= movement
 
-
   distance = get_distance(head_pos, tail_pos)
 
+  isTouching = distance < 2
 
-  print(f'H: {head_pos} - T: {tail_pos} - Distance: {distance}')
+  if isTouching: continue
+  else:
+    print('AHEAD')
+    print(f'H: {head_pos} - T: {tail_pos} - Distance: {distance}')
+
+
 
